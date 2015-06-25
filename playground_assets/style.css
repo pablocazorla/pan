@@ -1,0 +1,16 @@
+body{
+	padding: 0;margin: 0 0 0 300px;
+}
+body,
+#playground-index{
+	overflow: hidden;
+	overflow-y:scroll;
+}
+
+#playground-index{
+	position: fixed;
+	top: 0;bottom: 0;left: 0;width:270px;
+	font: 14px/1.3em sans-serif;
+	padding: 15px;
+	margin: 0;
+}
