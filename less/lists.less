@@ -1,0 +1,19 @@
+// Lists
+ul.list,ol.list{
+  margin-bottom: @margin-bottom;
+  li{
+    padding-top: 0.25 * @margin-bottom;
+    padding-bottom: 0.25 * @margin-bottom;
+  }
+}
+
+ul.list,ol.list,.list ul,.list ol{padding-left: 2em;}
+
+ul.list{list-style: @ul-style-level-1 outside none;}
+ol.list{list-style: @ol-style-level-1 outside none;}
+
+.list ul{list-style: @ul-style-level-2 outside none;}
+.list ol{list-style: @ol-style-level-2 outside none;}
+
+.list li ul{list-style: @ul-style-level-3 outside none;}
+.list li ol{list-style: @ol-style-level-3 outside none;}
