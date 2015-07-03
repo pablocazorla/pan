@@ -4,6 +4,9 @@ var mapResources = [
 	'_functions(less)',
 	'basic(less,html,js)',
 	'lists(less,html)',
-	'table(html)',
+	'table(less,html)',
+	'pre(less,html,js)',
+	'box-model(less,html)',
+	'form(less,html)',
 	'buttons(html)'
 ];

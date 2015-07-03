@@ -1,0 +1,90 @@
+form{
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+fieldset,.fieldset{
+  padding-bottom: 1.4 * @margin-bottom;
+  zoom:1;
+
+  &:before,
+  &:after{
+    content:"";display:table;
+  }
+  &:after{
+    clear:both;
+  }
+}
+label{
+  display: inline-block;
+  margin-bottom: .1em;
+
+	&.required::before{
+    content:'* ';color:@highlight-color;
+	}
+}
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="file"],
+input[type="number"],
+input[type="color"],
+input[type="search"],
+input[type="url"],
+textarea,
+select{
+  font-family:@font-family;
+  padding: @input-padding;
+  line-height: @input-line-height;
+  outline: none;
+  background-color: #FFF;
+  color: @input-color;
+  border-width: @input-border-width;
+  border-color: @input-border-color;
+  border-style:solid;
+  border-radius: @input-border-radius;
+  width: 100%;
+
+  &:focus{
+    border-color: @focus-color;
+  }
+  &.error, .error &{
+    border-color: @theme-error-color;
+  }
+  &[disabled],&.disabled{
+    opacity:.6;
+    cursor:not-allowed;
+  }
+}
+textarea{
+  resize:none;
+}
+select{
+  -webkit-appearance:none;
+	-moz-appearance:none;
+	appearance:none;
+  text-align: center;
+}
+.error-message{
+  color: @theme-error-color;
+  font-size: .9 * @font-size;
+  line-height: 1.1em;
+  display: none;
+  margin:0;
+  .error &{
+    display: block;
+  }
+}
+.input-help{
+  color: lighten(@color, 20%);
+  font-size: .9 * @font-size;
+  margin:0;
+  padding-top: .2em;
+}

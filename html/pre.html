@@ -1,0 +1,19 @@
+<pre>
+$.ajax({
+	url: url + nexus + PANDORA.LOADER.defaults.parameterUrl,
+	success: function(data) {
+		timer = setTimeout(function() {
+			if (!changed) {
+				clearTimeout(timer);
+				timer = null;
+				changed = true;
+				change(data);
+			}
+		}, PANDORA.LOADER.defaults.beforeTime);
+	},
+	error: loadSync
+});
+</pre>
+
+<p>
+Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin et libero diam. Aliquam <code>et nunc vestibulum</code> iaculis nisi sed, accumsan nisi. Curabitur et justo ut massa placerat scelerisque. Fusce at est at sem ullamcorper porta.</p>

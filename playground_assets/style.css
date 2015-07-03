@@ -1,5 +1,5 @@
-body{
-	padding:0;margin:0;
+body{margin:0;
+	padding:0;
 }
 body,
 #playground-index{
@@ -11,47 +11,58 @@ body,
 #playground-index{
 	position: fixed;z-index: 10;
 	top: 0;bottom: 0;left: 0;width:270px;
-	font: 12px/1.3em sans-serif;
-	padding: 15px;
 	margin: 0;
-	background-color: #FFF;
-	color: #333;
+	padding: 15px;
+
 	text-align: left;
+
+	color: #333;
+	background-color: #FFF;
+
+	font: 12px/1.3em sans-serif;
 	font-weight: normal;
 }
 #playground-index div{
 	margin: 0;padding: 0;
 }
 div#playground-title{
+	margin-bottom: 20px;
+
 	font-size: 20px;
 	line-height: 1.2em;
-	margin-bottom: 20px;
 }
 
 div.playground-list-element{
-	border-bottom:solid 1px #DDD;
-	line-height: 40px;
 	padding: 0 15px;
+
+	border-bottom:solid 1px #DDD;
+
+	line-height: 40px;
 }
 div.playground-list-element:first-child{
 	border-top:solid 1px #DDD;
 }
 .playground-list-switch{
 	display:inline-block;
-	border:solid 1px #CCC;
-	background-color: #40BB2C;
+
 	width:16px;height: 16px;
-	vertical-align: middle;
-	box-shadow: 0 0 0 2px #FFF inset;
 	margin-right: 10px;
+
 	cursor: pointer;
 	-webkit-transition:box-shadow .1s;
 	-ms-transition:box-shadow .1s;
 	transition:box-shadow .1s;
+	vertical-align: middle;
+
+	border:solid 1px #CCC;
+	background-color: #40BB2C;
+	box-shadow: 0 0 0 2px #FFF inset;
 }
 div.playground-list-element a{
 	display:inline-block;
+
 	text-decoration: none;
+
 	color: #333;
 }
 div.playground-list-element a:hover{
@@ -62,8 +73,9 @@ div.playground-list-element a:hover{
 	box-shadow: 0 0 0 10px #FFF inset;
 }
 div.playground-list-element.off a{
-	color: #999;
 	cursor: default;
+
+	color: #999;
 }
 div.playground-list-element.off a:hover{
 	text-decoration: none;
@@ -73,41 +85,66 @@ div.playground-list-element.off a:hover{
 #playground-error{
 	position: fixed;z-index: 11;
 	top: 0;right: 0;left: 0;
-	padding: 15px;
-	font: 16px/1.3em sans-serif;
-	margin: 0;
-	background-color: #FFB6AE;
-	border-bottom: 2px solid #D00;
-	color: #D00;
-	text-align: center;
-	font-weight: bold;
+
 	display: none;
+
+	margin: 0;
+	padding: 15px;
+
+	text-align: center;
+
+	color: #D00;
+	border-bottom: 2px solid #D00;
+	background-color: #FFB6AE;
+
+	font: 16px/1.3em sans-serif;
+	font-weight: bold;
 }
 
 /* playground-container *********************/
 #playground-container{
+	min-height: 100%;
 	margin: 0 0 0 300px;padding: 0;
-	min-height: 100%;
 }
 .playground-content{
 	width: 92%;
-	margin: 0 auto;
-	border-bottom: solid 10px #DDD;
 	min-height: 100px;
+	margin: 0 auto;
 	padding: 10px 0 0;
+
+	border-bottom: solid 10px #DDD;
 }
 .playground-content.off{
 	display: none;
 }
 .playground-content-title{
-	padding: 0 15px;
-	font: 14px/30px sans-serif;
-	background-color:#EEE;
-	border: solid 1px #DDD;
-	color: #333;
-	font-weight: normal;
 	position: relative;
+
 	display: inline-block;
+
+	margin: 0 0 10px;
+	padding: 0 15px;
+
+	color: #333;
+	border: solid 1px #DDD;
 	border-radius:15px;
-	margin: 0;
+	background-color:#EEE;
+
+	font: 14px/30px sans-serif;
+	font-weight: normal;
+}
+
+/*****************************/
+.col-content{
+	overflow: hidden;
+
+	margin-bottom: 15px;
+
+	text-align: center;
+
+	border: solid 1px #CCC;
+	background: #EEE;
+
+	font-size: 12px;
+	line-height: 50px;
 }

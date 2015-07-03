@@ -1,33 +1,42 @@
 // Fonts
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans);
-@font-family:'Open Sans',sans-serif;
-@heading-font-family:'Roboto Slab',sans-serif;
+@font-family: 'Open Sans',sans-serif;
+@heading-font-family: 'Roboto Slab',sans-serif;
+@monospace-font-family: monospace;
 
 // Main
-@font-size: 16px;
+@font-size: 14px;
 @line-height: 1.3em;
 @margin-bottom: @font-size;
-@color: #333;
-@background-color: #FFF;
-@border-color: #CCC;
+@border-radius: 3px;
+
+// Colors
+@color: #444;
+@background-color: #fff;
+@border-color: #ccc;
+@a-color: #02ad00;
+@focus-color: lighten(@a-color, 5%);
+@highlight-color: lighten(@a-color, 5%);
+@theme-warning-color: #eec100;
+@theme-danger-color: #d00;
+@theme-error-color: #d00;
 
 // Background-colors
-@background-color-warning: #FFE60E;
+@background-color-warning: lighten(@theme-warning-color, 30%);
 
 // Heading
-@heading-font-weight:normal;
-@heading-h5-h6-font-weight:bold;
+@heading-font-weight: normal;
+@heading-h5-h6-font-weight: bold;
 @headings-color: #111;
 
 // types
 @small-font-size: 0.7 * @font-size;
 @blockquote-font-size: 1.4 * @font-size;
 @blockquote-font-style: italic;
-@blockquote-border-left: 5px solid #DDD;
+@blockquote-border-left: 5px solid #ddd;
 @blockquote-color: lighten(@color, 25%);
 
 // Link
-@a-color: #02AD00;
 @a-text-decoration: none;
 @a-hover-color: lighten(@a-color, 5%);
 @a-hover-text-decoration: underline;
@@ -40,7 +49,35 @@
 @ul-style-level-1: disc;
 @ul-style-level-2: circle;
 @ul-style-level-3: square;
-
 @ol-style-level-1: decimal;
 @ol-style-level-2: lower-alpha;
 @ol-style-level-3: lower-roman;
+
+// Table
+@table-border-color: 1.1 * @border-color;
+@table-background-color: #ddd;
+@table-padding: 0.9em 1.5em;
+@table-font-size: 0.9 * @font-size;
+
+// Table condensed
+@table-condensed-padding: 0.2em 0.4em;
+@table-condensed-font-size: 0.7 * @font-size;
+
+// Pre
+@pre-font-size: @font-size;
+@pre-padding: 1em;
+@code-background: rgba(0,0,0,.05);
+@code-border-color: lighten(@border-color, 5%);
+@code-border-radius: @border-radius;
+
+// Box Model
+@wrap-max-width: 1200px;
+@gutter: 30px;
+
+// Form
+@input-padding: 0.4em;
+@input-line-height: 1.4em;
+@input-border-radius: 0.66666666 * @border-radius;
+@input-border-color: lighten(@border-color, 4%);
+@input-color: lighten(@color, 10%);
+@input-border-width: 2px;

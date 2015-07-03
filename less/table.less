@@ -1,0 +1,60 @@
+// Table
+table{
+	font-size: @table-font-size;
+	width: 100%;
+	margin-bottom: 1.4 * @margin-bottom;
+	text-align: left;
+
+	&,
+	tr{
+		border-bottom: solid 1px @table-border-color;
+	}
+	thead{
+		background-color: @table-background-color;
+		font-weight: bold;
+	}
+	th,
+	td{
+		padding: @table-padding;	
+		vertical-align:middle;
+	}
+	tfoot{
+		//background-color: 0.9 * @table-background-color;
+		font-weight: bold;
+	}
+	// Table condensed
+	&.condensed{
+		font-size: @table-condensed-font-size;
+		th,
+		td{
+			padding: @table-condensed-padding;
+		}
+	}
+	// Table bordered
+	&.bordered{
+		border-top: solid 1px @border-color;
+		border-left: solid 1px @border-color;
+		&,
+		tr{
+			border-bottom: solid 1px @border-color;
+		}
+		th,
+		td{
+			border-right: solid 1px @border-color;
+		}
+	}
+	// Table striped
+	&.striped{
+		tbody tr{
+			border-bottom: 0;
+			&:nth-child(even){
+				background-color: 1.1 * @table-background-color;				
+			}
+		}
+		tfoot{
+			border-top: solid 1px @table-border-color;
+		}	
+	}
+}
+
+
