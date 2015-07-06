@@ -1,5 +1,5 @@
 // Fonts
-@import url(http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400,600);
 @font-family: 'Open Sans',sans-serif;
 @heading-font-family: 'Roboto Slab',sans-serif;
 @monospace-font-family: monospace;
@@ -8,21 +8,25 @@
 @font-size: 14px;
 @line-height: 1.3em;
 @margin-bottom: @font-size;
-@border-radius: 3px;
+@border-radius: 2px;
 
 // Colors
 @color: #444;
 @background-color: #fff;
 @border-color: #ccc;
-@a-color: #02ad00;
+@a-color: #00a86c;
 @focus-color: lighten(@a-color, 5%);
 @highlight-color: lighten(@a-color, 5%);
+@theme-info-color: #0091d3;
 @theme-warning-color: #eec100;
 @theme-danger-color: #d00;
 @theme-error-color: #d00;
 
 // Background-colors
 @background-color-warning: lighten(@theme-warning-color, 30%);
+
+// cursors
+@cursor-disabled: not-allowed;
 
 // Heading
 @heading-font-weight: normal;
@@ -77,7 +81,44 @@
 // Form
 @input-padding: 0.4em;
 @input-line-height: 1.4em;
-@input-border-radius: 0.66666666 * @border-radius;
+@input-border-radius: @border-radius;
 @input-border-color: lighten(@border-color, 4%);
 @input-color: lighten(@color, 10%);
 @input-border-width: 2px;
+
+// buttons
+@btn-font-weight: 600;
+@btn-line-height: @input-line-height;
+@btn-padding-vertical: @input-padding;
+@btn-padding-horizontal: 2 * @input-padding;
+@btn-border-radius: @border-radius;
+
+// btn default
+@btn-default-color: @color;
+@btn-default-background-color: #ddd;
+@btn-default-border-color: transparent;
+
+// btn primary
+@btn-primary-color: #fff;
+@btn-primary-background-color: @a-color;
+@btn-primary-border-color: transparent;
+
+// btn secondary
+@btn-secondary-color: #fff;
+@btn-secondary-background-color: #bbb;
+@btn-secondary-border-color: transparent;
+
+// btn info
+@btn-info-color: #fff;
+@btn-info-background-color: @theme-info-color;
+@btn-info-border-color: transparent;
+
+// btn warning
+@btn-warning-color: #fff;
+@btn-warning-background-color: darken(@theme-warning-color, 4%);
+@btn-warning-border-color: transparent;
+
+// btn danger
+@btn-danger-color: #fff;
+@btn-danger-background-color: @theme-danger-color;
+@btn-danger-border-color: transparent;

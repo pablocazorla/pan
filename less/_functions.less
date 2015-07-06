@@ -1,5 +1,58 @@
 // Headling font-size
-.headling-font-size_function(@num){
-	font-size: 0.8 * @font-size + ((@num / 6) * (@num / 6) * (@num / 6) * 2.8 * @font-size);
-	line-height: @line-height;
+.headling-font-size_function(@num) {
+  font-size: 0.8 * @font-size + ((@num / 6) * (@num / 6) * (@num / 6) * 2.8 * @font-size);
+  line-height: @line-height;
+}
+.user-select-none {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.button-variant(@color; @background; @border) {
+  color: @color;
+  background-color: @background;
+  border-color: @border;
+  &:focus,
+  &.focus {
+    color: @color;
+    background-color: darken(@background, 12%);
+    border-color: darken(@border, 12%);
+  }
+  &:hover {
+    color: @color;
+    background-color: darken(@background, 6%);
+    border-color: darken(@border, 6%);
+  }
+  &:active,
+  &.active {
+    color: @color;
+    background-color: darken(@background, 10%);
+    border-color: darken(@border, 10%);
+    background-image: none;
+    &:hover,
+    &:focus,
+    &.focus {
+      color: @color;
+      background-color: darken(@background, 18%);
+      border-color: darken(@border, 18%);
+    }
+  }
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &,
+    &:hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active {
+      color: @color !important;
+      background-color: @background;
+      border-color: @border;
+    }
+  }
+}
+.button-size(@scale) {
+  font-size: @scale*@font-size;
 }

@@ -8,55 +8,92 @@ body {
 }
 
 // Heading
-h1,.h1{.headling-font-size_function(6);}
-h2,.h2{.headling-font-size_function(5);}
-h3,.h3{.headling-font-size_function(4);}
-h4,.h4{.headling-font-size_function(3);}
-h5,.h5{.headling-font-size_function(2);}
-h6,.h6{.headling-font-size_function(1);}
-
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
+h1,
+.h1 {
+  .headling-font-size_function(6);
+}
+h2,
+.h2 {
+  .headling-font-size_function(5);
+}
+h3,
+.h3 {
+  .headling-font-size_function(4);
+}
+h4,
+.h4 {
+  .headling-font-size_function(3);
+}
+h5,
+.h5 {
+  .headling-font-size_function(2);
+}
+h6,
+.h6 {
+  .headling-font-size_function(1);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
   font-family: @heading-font-family;
   font-weight: @heading-font-weight;
   color: @headings-color;
   margin-bottom: @margin-bottom;
   padding-top: 0.7 * @margin-bottom;
-
-  small,.small {
+  small,
+  .small {
     font-weight: normal;
     line-height: 1;
   }
 }
-h5,.h5,
-h6,.h6{font-weight: @heading-h5-h6-font-weight;}
+h5,
+.h5,
+h6,
+.h6 {
+  font-weight: @heading-h5-h6-font-weight;
+}
 
 // p
-p{margin-bottom: @margin-bottom;}
+p {
+  margin-bottom: @margin-bottom;
+}
 
 // types
-small,.small {
+small,
+.small {
   font-size: @small-font-size;
 }
-strong,.strong{
+strong,
+.strong {
   font-weight: bold;
 }
-i,.i,.italic{
+i,
+.i,
+.italic {
   font-style: italic;
 }
-mark,.mark {
+mark,
+.mark {
   background-color: @background-color-warning;
-  padding: .2em;
+  padding: 0.2em;
 }
 blockquote {
   padding: 2 * @margin-bottom;
-  margin: 0 2 * @margin-bottom 2 * @margin-bottom;
+  margin: 0;
   font-size: @blockquote-font-size;
   font-style: @blockquote-font-style;
-  border-left:  @blockquote-border-left;
+  border-left: @blockquote-border-left;
   color: @blockquote-color;
-  line-height:@line-height;
-
+  line-height: @line-height;
   * {
     &:last-child {
       margin-bottom: 0;
@@ -65,17 +102,16 @@ blockquote {
 }
 
 // Link
-a {
+a,
+.a {
   color: @a-color;
   text-decoration: @a-text-decoration;
-
   &:hover,
   &:focus {
     color: @a-hover-color;
     text-decoration: @a-hover-text-decoration;
   }
-
-  &.disabled{
+  &.disabled {
     color: @a-disabled-color;
     cursor: not-allowed;
     &:hover,
@@ -87,26 +123,55 @@ a {
 }
 
 // Alignment
-.align-left{ text-align: left; }
-.align-right{ text-align: right; }
-.align-center{ text-align: center; }
-.align-justify{ text-align: justify; }
-.nowrap{ white-space: nowrap; }
+.align-left {
+  text-align: left;
+}
+.align-right {
+  text-align: right;
+}
+.align-center {
+  text-align: center;
+}
+.align-justify {
+  text-align: justify;
+}
+.nowrap {
+  white-space: nowrap;
+}
 
 // Float
-.float-left{ float: left; }
-.float-right{ float: right; }
-.float-none{ float: none; }
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+.float-none {
+  float: none;
+}
 
 // Clear
-.clear-left{clear:left;}
-.clear-right{clear:right;}
-.clear,.clear-both{clear:both}
+.clear-left {
+  clear: left;
+}
+.clear-right {
+  clear: right;
+}
+.clear,
+.clear-both {
+  clear: both;
+}
 
 // Transformation
-.lowercase{ text-transform: lowercase; }
-.uppercase{ text-transform: uppercase; }
-.capitalize{ text-transform: capitalize; }
+.lowercase {
+  text-transform: lowercase;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.capitalize {
+  text-transform: capitalize;
+}
 
 // hr
 hr {
@@ -116,8 +181,9 @@ hr {
 }
 
 // iframe, canvas
-iframe, canvas {
-    border: 1px solid @border-color;
-    display: block;
-    margin: 0 auto 1.4 * @margin-bottom;
+iframe,
+canvas {
+  border: 1px solid @border-color;
+  display: block;
+  margin: 0;
 }

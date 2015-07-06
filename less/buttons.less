@@ -1,0 +1,87 @@
+// buttons
+.btn {
+  display: inline-block;
+  font-size: @font-size;
+  font-weight: @btn-font-weight;
+  padding: @btn-padding-vertical @btn-padding-horizontal;
+  line-height: @btn-line-height;
+  border-radius: @btn-border-radius;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  background-color: transparent;
+  color: @color;
+  white-space: nowrap;
+  outline: 0;
+  text-decoration: none;
+  .user-select-none;
+  &:hover,
+  &:focus,
+  &.focus {
+    text-decoration: none;
+    color: lighten(@color, 15%);
+  }
+  &:active,
+  &.active {
+
+  }
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    cursor: @cursor-disabled;
+    opacity: 0.6;
+  }
+}
+
+// Variants
+.btn-link {
+  .a;
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &,
+    &:hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active {
+      text-decoration: none;
+    }
+  }
+}
+.btn-default {
+  .button-variant(@btn-default-color; @btn-default-background-color; @btn-default-border-color);
+}
+.btn-primary {
+  .button-variant(@btn-primary-color; @btn-primary-background-color; @btn-primary-border-color);
+}
+.btn-secondary {
+  .button-variant(@btn-secondary-color; @btn-secondary-background-color; @btn-secondary-border-color);
+}
+.btn-info {
+  .button-variant(@btn-info-color; @btn-info-background-color; @btn-info-border-color);
+}
+.btn-warning {
+  .button-variant(@btn-warning-color; @btn-warning-background-color; @btn-warning-border-color);
+}
+.btn-danger {
+  .button-variant(@btn-danger-color; @btn-danger-background-color; @btn-danger-border-color);
+}
+
+// Sizes
+.btn-smallest {
+  font-weight: normal;
+  .button-size(.6);
+}
+.btn-small {
+  .button-size(.7);
+}
+.btn-big {
+  .button-size(1.3);
+}
+.btn-biggest {
+  .button-size(1.8);
+}

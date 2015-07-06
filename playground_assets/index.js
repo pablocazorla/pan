@@ -8,5 +8,6 @@ var mapResources = [
 	'pre(less,html,js)',
 	'box-model(less,html)',
 	'form(less,html)',
-	'buttons(html)'
+	'buttons(less,html)',
+	'button-groups(less,html)'
 ];

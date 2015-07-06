@@ -34,6 +34,17 @@
 					<option value="5">Option 5</option>
 				</select>
 			</div>
+			<div class="col-5">
+				<label for="">Select class="dropdown":</label>
+				<select class="dropdown">
+					<option value="-1">Please, select</option>
+					<option value="1">Option 1</option>
+					<option value="2">Option 2</option>
+					<option value="3">Option 3</option>
+					<option value="4">Option 4</option>
+					<option value="5">Option 5</option>
+				</select>
+			</div>
 		</div>
 	</fieldset>
 	<fieldset>
@@ -45,9 +56,31 @@
 		<input type="text" disabled class="" id="exampleInputssEmail1" placeholder="Gender">
 	</fieldset>
 	<div class="fieldset">
-		<input type="checkbox" id="chk1"><label for="chk1">Check me out 1</label>
-		<input type="checkbox" id="chk2"><label for="chk2">Check me out 2</label>
-		<input type="checkbox" id="chk3"><label for="chk3">Check me out 3</label>
+		<div class="row">
+			<div class="col-6">
+				<input type="checkbox" id="chk1"><label for="chk1">Check me out 1</label><br>
+				<input type="checkbox" id="chk2"><label for="chk2">Check me out 2</label><br>
+				<input type="checkbox" id="chk3"><label for="chk3">Check me out 3</label>
+			</div>
+			<div class="col-6">
+				<input type="radio" id="rad1" name="rads"><label for="rad1">Check me out 1</label><br>
+				<input type="radio" id="rad2" name="rads"><label for="rad2">Check me out 2</label><br>
+				<input type="radio" id="rad3" name="rads"><label for="rad3">Check me out 3</label>
+			</div>
+		</div>
 	</div>
-	<button type="submit" class="btn">Submit</button>
+	<div class="fieldset">
+
+	</div>
+	<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<form>
+	<fieldset class="inline">
+		<h4>fieldset class="inline"</h4>
+		<label for="" class="required">Name:</label>
+		<input type="text" class="" id="exampleInputEmaeil1" placeholder="Name">
+		<label for="exampleInputEmail1">Email address:</label>
+		<input type="email" class="" id="exampleInputEmail1" placeholder="Email">
+	</fieldset>
 </form>
