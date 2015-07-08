@@ -52,6 +52,7 @@ $('document').ready(function() {
 			var u = format + '/' + nome + '.' + format;
 			$.ajax({
 				url: u,
+				cache: false,
 				success: callback,
 				error: callback
 			});
@@ -84,8 +85,8 @@ $('document').ready(function() {
 			}
 			if (typeof less !== 'undefined') {
 				less.render(lessInput).then(function(output) {
-					$style.html(output.css);					
-				},function(error){
+					$style.html(output.css);
+				}, function(error) {
 					$lessError.show().text(error.message);
 				});
 			}
@@ -104,9 +105,17 @@ $('document').ready(function() {
 				loadJs();
 			}
 		},
-		indJs = -1,
+		indJs = 0,
 		loadJs = function() {
-
+			var u = 'js/' + mapJs[indJs] + '.js';
+			$.getScript(u, function() {
+				++indJs;
+				if (indJs < mapJs.length) {
+					loadJs();
+				} else {
+					Pandora.init();
+				}
+			});
 		};
 
 	/////////////////////////////////

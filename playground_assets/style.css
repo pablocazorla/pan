@@ -1,4 +1,5 @@
-body{margin:0;
+body{margin:0;
+
 	padding:0;
 }
 body,
@@ -103,12 +104,13 @@ div.playground-list-element.off a:hover{
 
 /* playground-container *********************/
 #playground-container{
-	min-height: 100%;
+	min-height: 100%;
+
 	margin: 0 0 0 300px;padding: 0;
 }
 .playground-content{
 	width: 92%;
-	min-height: 100px;
+	min-height: 600px;
 	margin: 0 auto;
 	padding: 10px 0 0;
 
@@ -122,7 +124,8 @@ div.playground-list-element.off a:hover{
 
 	display: inline-block;
 
-	margin: 0 0 10px;
+	margin: 0 0 10px;
+
 	padding: 0 15px;
 
 	color: #333;
@@ -145,7 +148,8 @@ div.playground-list-element.off a:hover{
 	border: solid 1px #CCC;
 	background: #EEE;
 
-	font-size: 12px;
+	font-size: 12px;
+
 	line-height: 50px;
 }
 

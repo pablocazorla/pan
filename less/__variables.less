@@ -81,7 +81,7 @@
 // Form
 @input-padding: 0.4em;
 @input-line-height: 1.4em;
-@input-border-radius: @border-radius;
+@input-border-radius: 4px;//@border-radius;
 @input-border-color: lighten(@border-color, 4%);
 @input-color: lighten(@color, 10%);
 @input-border-width: 2px;
@@ -91,7 +91,8 @@
 @btn-line-height: @input-line-height;
 @btn-padding-vertical: @input-padding;
 @btn-padding-horizontal: 2 * @input-padding;
-@btn-border-radius: @border-radius;
+@btn-border-radius: 10px;//@border-radius;
+@btn-border-width: 1px;
 
 // btn default
 @btn-default-color: @color;
@@ -101,7 +102,7 @@
 // btn primary
 @btn-primary-color: #fff;
 @btn-primary-background-color: @a-color;
-@btn-primary-border-color: transparent;
+@btn-primary-border-color: transparent;//lighten(@a-color, 10%);
 
 // btn secondary
 @btn-secondary-color: #fff;
@@ -122,3 +123,36 @@
 @btn-danger-color: #fff;
 @btn-danger-background-color: @theme-danger-color;
 @btn-danger-border-color: transparent;
+
+// btn-group *****************************/
+@btn-group-btn-margin: 1px;//-1 * @btn-border-width; if @btn-border-width > 0 || @btn-border-color != transparent
+
+// dropdown
+@dropdown-color: @color;
+@dropdown-background-color: @background-color;
+@dropdown-border: 1px solid @border-color;
+@dropdown-border-radius: @border-radius;
+@dropdown-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+@dropdown-font-size: @font-size;
+@dropdown-min-width: 160px;
+@dropdown-a-hover-background-color: desaturate(lighten(@a-color, 60%),60%);
+@dropdown-separator-color: lighten(@border-color, 10%);
+@dropdown-margin: 1px;
+
+// tabs
+@tabs-margin-bottom: 1.5 * @margin-bottom;
+@tab-list-border-bottom: 1px solid @border-color;
+@tab-list-li-line-height: 2 * @line-height;
+@tab-list-li-padding: 0 3em;
+@tab-content-padding: @margin-bottom 0 0;
+@tab-list-li-active-color: darken(@color, 30%);
+@tab-list-li-color: lighten(@tab-list-li-active-color, 60%);
+@tab-list-li-hover-color: lighten(@tab-list-li-active-color, 20%);
+@tab-list-li-border-width:3px;
+@tab-list-li-border-color: @a-color;
+
+// tabs vertical
+@tab-list-vertical-width: 160px;
+@tab-content-padding-vertical: 2 * @margin-bottom;
+@tab-list-li-vertical-padding: 2em;
+@tab-list-li-vertical-line-height: 1.2 * @tab-list-li-line-height;

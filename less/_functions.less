@@ -40,7 +40,8 @@
   }
   &.disabled,
   &[disabled],
-  fieldset[disabled] & {
+  fieldset[disabled] &,
+  .disabled & {
     &,
     &:hover,
     &:focus,
@@ -52,7 +53,23 @@
       border-color: @border;
     }
   }
+  .triangle{
+    border-top-color:@color;
+  }
 }
 .button-size(@scale) {
   font-size: @scale*@font-size;
+  .triangle{
+    border-width: 0.3 * @scale * @font-size;
+  }
+}
+.transform(@tr){
+  -webkit-transform:@tr;
+  -ms-transform:@tr;
+  transform:@tr;
+}
+.transition(@tr){
+  -webkit-transition:@tr;
+  -ms-transition:@tr;
+  transition:@tr;
 }

@@ -1,0 +1,50 @@
+.input-group{
+
+	border-collapse: separate;
+  display: table;
+  position: relative;
+
+	input,
+	.input-group-btn{
+		display:table-cell;
+		vertical-align: middle;
+		
+	}
+	.btn{
+	  border-radius: @input-border-radius;
+	  padding: @input-padding;
+  	line-height: @input-line-height;
+  	border-width: @input-border-width;
+	}
+
+	input:first-child:not(:last-child),
+	.input-group-btn:first-child:not(:last-child) .btn{
+		border-bottom-right-radius: 0;
+	  border-top-right-radius: 0;
+	}
+	.input-group-btn:first-child:not(:last-child) .btn{
+	  margin-right: -1 * @input-border-width;
+	}			
+	input:last-child:not(:first-child),
+	.input-group-btn:last-child:not(:first-child) .btn{
+		border-bottom-left-radius: 0;
+	  border-top-left-radius: 0;
+	}
+	.input-group-btn:last-child:not(:first-child) .btn{
+	  margin-left: -1 * @input-border-width;
+	}
+	input:not(:first-child):not(:last-child),
+	.input-group-btn:not(:first-child):not(:last-child) .btn{
+		border-radius: 0;
+	}
+	.input-group-btn:not(:first-child):not(:last-child) .btn{
+		margin: 0 -1 * @input-border-width;
+	}
+
+	.input-group-btn{
+		font-size: 0;
+    position: relative;
+    white-space: nowrap;
+    width: 1%;
+	}
+}

@@ -1,0 +1,118 @@
+// tabs
+.tabs{
+  zoom:1;
+  &:before,
+  &:after{
+    content:"";display:table;
+  }
+  &:after{
+    clear:both;
+  }
+  margin-bottom: @tabs-margin-bottom; 
+
+  .tab-list{
+    list-style: outside none none;
+    border-bottom: @tab-list-border-bottom;
+
+    & > li{
+      display:inline-block;
+      cursor: pointer;
+      line-height:@tab-list-li-line-height;
+      padding: @tab-list-li-padding;
+      color: @tab-list-li-color;
+      border-bottom: solid @tab-list-li-border-width transparent;
+      position: relative;
+      top: 0.5 * @tab-list-li-border-width;
+      .transition(border-color .2s);
+      &:hover,
+      &:focus{
+        color: @tab-list-li-hover-color;
+      }
+
+      &.active{        
+        cursor: default;
+        border-bottom-color: @tab-list-li-border-color;        
+
+        &,
+        &:hover,
+        &:focus{
+          color: @tab-list-li-active-color;
+        }
+      }
+    }
+  }
+
+  .tab-content{
+    list-style: outside none none;
+    padding: @tab-content-padding;
+
+    & > li{
+      display: none;
+
+      &.active{        
+        display: block;
+      }
+    }
+  }
+
+  &.vertical{
+    // left
+    .tab-list{
+      width: @tab-list-vertical-width;
+      border-bottom: transparent;
+      float: left;      
+      border-right: @tab-list-border-bottom;
+
+      & > li{
+        top:0;
+        display: block;
+        line-height:@tab-list-li-vertical-line-height;
+        border-bottom: none;
+        left: 0.5 * @tab-list-li-border-width;
+        padding: 0 @tab-list-li-vertical-padding 0 0;
+        border-right: solid @tab-list-li-border-width transparent;
+        text-align: right;
+        &.active{        
+          border-right-color: @tab-list-li-border-color;
+        }
+      }
+    }      
+      
+    // right
+    &.right .tab-list{
+      float: right;
+      border-right: none;
+      border-left: @tab-list-border-bottom;
+
+      & > li{
+        left:auto;
+        right: 0.5 * @tab-list-li-border-width + 1;
+        padding: 0 0 0 @tab-list-li-vertical-padding;
+        border-right: none;
+        border-left: solid @tab-list-li-border-width transparent;
+        text-align: left;
+        &.active{        
+          border-left-color: @tab-list-li-border-color;
+        }
+      }
+    }     
+    
+    // left
+    .tab-content{
+      padding: 0;
+      padding-left: @tab-content-padding-vertical;
+      border-left: @tab-list-border-bottom;
+      margin-left: @tab-list-vertical-width - 1;
+    }
+    // right
+    &.right .tab-content{
+      padding-left: 0;
+      border-left: none;
+      margin-left: 0;
+      padding: 0;
+      padding-right: @tab-content-padding-vertical;
+      border-right: @tab-list-border-bottom;
+      margin-right: @tab-list-vertical-width - 1;
+    }
+  }
+}
