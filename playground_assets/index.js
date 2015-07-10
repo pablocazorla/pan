@@ -13,5 +13,13 @@ var mapResources = [
 	'button-groups(less,html)',
 	'dropdown(less,html,js)',
 	'tabs(less,html,js)',
-	'image-responsive(less,html)'
+	'image-responsive(less,html)',
+	'modal(less,html,js)',
+	'tooltip(less,html,js)',
+	'alert(less,html,js)',
+	'button-loader(html,js)',
+	'collapser(less,html,js)',
+	'carousel(less,html,js)',
+	'icons(less,html)',
+	'panel(less,html)'
 ];

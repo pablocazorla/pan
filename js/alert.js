@@ -1,0 +1,4 @@
+Pandora.alert = {
+	init: function() {
+	}
+}

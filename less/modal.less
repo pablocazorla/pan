@@ -1,0 +1,66 @@
+.dimmer{
+  display: none;
+  position: fixed;
+  z-index: @modal-z-index - 1;
+  top:0;bottom: 0;left: 0;right: 0;
+  overflow: hidden;
+  background-color: @dimmer-background-color;
+  opacity: @dimmer-opacity;
+}
+
+.modal{
+  display: none;
+  position: fixed;
+  z-index: @modal-z-index;
+  top: 0; left: 50%;
+  padding: 10px;
+  width: @modal-width + 20;
+  margin-left: -0.5 * (@modal-width + 20);
+
+  .transition(top .3s);
+
+  .modal-body{
+    position: relative;
+    background-color: @modal-background-color;
+    padding: @modal-padding;
+    box-shadow: @modal-box-shadow;
+    border-radius: @modal-border-radius;
+
+    .modal-scroll{
+      min-height: @modal-content-min-height;
+      overflow: hidden;
+      overflow-y: auto;
+
+      .transition(height .2s);
+    }
+
+    .modal-close{
+      position: absolute;
+      top: 5px;right: 5px;
+      display: block;
+      width: @modal-close-size;
+      height: @modal-close-size;
+      line-height: @modal-close-size;
+      font-size: @modal-close-size;
+      text-align: center;
+      cursor: pointer;
+      color: @modal-close-color;
+
+      &:hover{
+        color: lighten(@modal-close-color, 10%);;
+      }
+      &:active{
+        color: darken(@modal-close-color, 10%);;
+      }
+    }
+
+    .modal-content{
+      min-width: @modal-content-min-width;      
+    }
+
+    .modal-actions{
+      text-align: center;
+      padding-top: @modal-padding;
+    }
+  }
+}
