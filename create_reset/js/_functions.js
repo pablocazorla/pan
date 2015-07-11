@@ -1,3 +1,4 @@
+// Basic
 S = {};
 Pandora = {
 	init: function(context,callback) {

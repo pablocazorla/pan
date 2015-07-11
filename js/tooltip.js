@@ -1,4 +1,0 @@
-Pandora.tooltip = {
-	init: function() {
-	}
-}

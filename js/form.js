@@ -1,5 +1,0 @@
-Pandora.form = {
-	init: function() {
-		
-	}
-};

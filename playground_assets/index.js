@@ -1,8 +1,7 @@
 var mapResources = [
-	'___reset(less)',
 	'__variables(less)',
 	'_functions(less,js)',
-	'basic(less,html,js)',
+	'basic(less,html)',
 	'lists(less,html)',
 	'table(less,html)',
 	'pre(less,html,js)',

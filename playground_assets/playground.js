@@ -3,7 +3,8 @@ $('document').ready(function() {
 	'use strict';
 
 	// classWord
-	var classWord = 'playground';
+	var classWord = 'playground',
+		route = 'create/';
 
 	// Parse Map
 	var mapHtml = [],
@@ -29,27 +30,43 @@ $('document').ready(function() {
 		}
 	};
 
+	var compiledResult = {
+		css: '',
+		js: ''
+	};
+
+	var switchElement = function(nome) {
+		if (mapSwitchElements[nome]) {
+			$('#' + nome + '-' + classWord + '-link').addClass('off');
+			$('#' + nome + '-' + classWord).addClass('off');
+			mapSwitchElements[nome] = false;
+		} else {
+			$('#' + nome + '-' + classWord + '-link').removeClass('off');
+			$('#' + nome + '-' + classWord).removeClass('off');
+			mapSwitchElements[nome] = true;
+		}
+		renderLessStyles();
+	};
+
 	var $playgroundList = $('#playground-list'),
 		createLink = function(nome) {
-			var $link = $('<div class="playground-list-element"></div>'),
+			var $link = $('<div class="playground-list-element" id="' + nome + '-' + classWord + '-link"></div>'),
 				$chk = $('<span class="playground-list-switch"></span>'),
-				$a = $('<a href="#' + nome + '-' + classWord + '">' + nome + '</a>');
-			$link.append($chk).append($a).appendTo($playgroundList);
+				$a = $('<a href="#' + nome + '-' + classWord + '">' + nome + '</a>'),
+				$reload = $('<span class="playground-list-reload" title="reload"></span>');
+
+			$link.append($chk).append($a).append($reload).appendTo($playgroundList);
 			$chk.click(function() {
-				if (mapSwitchElements[nome]) {
-					$link.addClass('off');
-					$('#' + nome + '-' + classWord).addClass('off');
-					mapSwitchElements[nome] = false;
-				} else {
-					$link.removeClass('off');
-					$('#' + nome + '-' + classWord).removeClass('off');
-					mapSwitchElements[nome] = true;
-				}
+				switchElement(nome);
 			});
+			$reload
+				.click(function() {
+					reloadElement(nome);
+				});
 		};
 
 	var loadElement = function(format, nome, callback) {
-			var u = format + '/' + nome + '.' + format;
+			var u = route + format + '/' + nome + '.' + format;
 			$.ajax({
 				url: u,
 				cache: false,
@@ -85,6 +102,7 @@ $('document').ready(function() {
 			}
 			if (typeof less !== 'undefined') {
 				less.render(lessInput).then(function(output) {
+					compiledResult.css = output.css;
 					$style.html(output.css);
 				}, function(error) {
 					$lessError.show().text(error.message);
@@ -105,10 +123,23 @@ $('document').ready(function() {
 				loadJs();
 			}
 		},
+		jsData = {},
 		indJs = 0,
+		jsOutput = function() {
+			var o = '';
+			for (var i = 0; i < mapJs.length; i++) {
+				var n = mapJs[i];
+				if (mapSwitchElements[n]) {
+					o += jsData[n];
+				}
+			}
+			return o;
+		},
 		loadJs = function() {
-			var u = 'js/' + mapJs[indJs] + '.js';
-			$.getScript(u, function() {
+			var n = mapJs[indJs];
+			var u = route + 'js/' + n + '.js';
+			$.getScript(u, function(data) {
+				jsData[n] = data.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 				++indJs;
 				if (indJs < mapJs.length) {
 					loadJs();
@@ -118,8 +149,51 @@ $('document').ready(function() {
 			});
 		};
 
+	var reloadElement = function(nome) {
+		if (mapLess.indexOf(nome) != -1) {
+			loadElement('less', '__variables', function(data) {
+				lessData['__variables'] = data;
+				loadElement('less', '_functions', function(data) {
+					lessData['_functions'] = data;
+					loadElement('less', nome, function(data) {
+						lessData[nome] = data;
+						renderLessStyles();
+						if (mapHtml.indexOf(nome) != -1) {
+							loadElement('html', nome, function(data) {
+								$('#' + nome + '-' + classWord).html(data);
+								Pandora.init('#' + nome + '-' + classWord);
+							});
+						}
+					});
+				});
+			});
+		}
+	};
+
 	/////////////////////////////////
 	loadHtml();
+
+	/* Compile result ***********************************************/
+
+	var $result = $('#playground-result'),
+		$result_css = $('#playground-result-css'),
+		$result_js = $('#playground-result-js'),
+		compileOut = function() {
+			$result_css.html(compiledResult.css);
+			$result_js.html(jsOutput());
+			$result.show();
+		};
+	$('#playground-compile-btn').click(function(e) {
+		e.preventDefault();
+		compileOut();
+	});
+	$('.playground-result-close').click(function(e) {
+		e.preventDefault();
+		$result.hide();
+	});
+
+	/* After Load All ***********************************************/
+
 	var afterLoadAll = function() {
 
 		// Modal
@@ -186,19 +260,19 @@ $('document').ready(function() {
 					});
 				}
 			}).actions([{
-					text: 'Aceptar',
-					className: 'btn btn-primary',
-					click: function(m) {
-						m.hide();
-					}
-				}, {
-					text: 'o'
-				}, {
-					text: 'Cancelar',
-					click: function(m) {
-						m.hide();
-					}
-				}]);
+				text: 'Aceptar',
+				className: 'btn btn-primary',
+				click: function(m) {
+					m.hide();
+				}
+			}, {
+				text: 'o'
+			}, {
+				text: 'Cancelar',
+				click: function(m) {
+					m.hide();
+				}
+			}]);
 
 
 			$('#btn-show-modal-ajax').click(function(e) {

@@ -3,6 +3,24 @@
   font-size: 0.8 * @font-size + ((@num / 6) * (@num / 6) * (@num / 6) * 2.8 * @font-size);
   line-height: @line-height;
 }
+.a-link{
+  color: @a-color;
+  text-decoration: @a-text-decoration;
+  &:hover,
+  &:focus {
+    color: @a-hover-color;
+    text-decoration: @a-hover-text-decoration;
+  }
+  &.disabled {
+    color: @a-disabled-color;
+    cursor: not-allowed;
+    &:hover,
+    &:focus {
+      color: @a-disabled-color;
+      text-decoration: @a-text-decoration;
+    }
+  }
+}
 .user-select-none {
   -webkit-user-select: none;
   -moz-user-select: none;

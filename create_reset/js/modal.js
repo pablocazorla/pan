@@ -5,9 +5,7 @@ Pandora.modalConstructor = {
 		"use strict";
 
 		if (!this.initializated) {
-
 			this.initializated = true;
-
 			var $dimmer,
 				idCounter = 0,
 				current = null,
@@ -56,7 +54,6 @@ Pandora.modalConstructor = {
 					}, options);
 
 					var self = this;
-
 					// Render
 					if (typeof $dimmer === 'undefined') {
 						$dimmer = $('<div class="dimmer"></div>').appendTo(S.$body).click(function() {

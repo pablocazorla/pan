@@ -4,9 +4,7 @@ Pandora.dropdown = {
 		$(ctx + 'select.dropdown').each(function() {
 			var $select = $(this).removeClass('dropdown').hide(),
 				$options = $select.find('option'),
-
 				triangleHtml = ' <span class="triangle"></span>',
-
 				$dropdown = $('<span class="dropdown extended"></span>'),
 				$toggle = $('<a class="btn btn-primary dropdown-toggle" href="javascript:void(0);"></a>').html($options.filter(':selected').text() + triangleHtml).appendTo($dropdown),
 
@@ -14,7 +12,7 @@ Pandora.dropdown = {
 				arrayLinks = [];
 
 			for (var i = 0; i < $options.length; i++) {
-				$('<span><a href="#sadas">' + $options.eq(i).text() + '</a></span>').appendTo($menu);
+				$('<span><a href="">' + $options.eq(i).text() + '</a></span>').appendTo($menu);
 			};
 			$select.after($dropdown);
 
@@ -37,9 +35,6 @@ Pandora.dropdown = {
 				clickInside = false,
 				fading = false,
 				duration = 100;
-
-
-
 			$toggle.click(function() {
 				if (!active && !fading) {
 					$menu.fadeIn(duration, function() {
@@ -58,8 +53,6 @@ Pandora.dropdown = {
 			}).mousedown(function() {
 				clickInside = true;
 			});
-
-
 			S.$window.mousedown(function() {
 				if (active && !clickInside && !fading) {
 					fading = true;
@@ -70,7 +63,6 @@ Pandora.dropdown = {
 				}
 				clickInside = false;
 			});
-
 		});
 	}
 };
