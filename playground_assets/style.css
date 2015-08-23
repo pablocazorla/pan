@@ -241,3 +241,21 @@ div#playground-actions{
 .playground-result-close:active{
   color: #000;
 }
+
+/* icons */
+.fa-box-sample{
+	float:left;
+	width: 20%;
+	height: 40px;
+	font-size: 12px;
+	color: #777;
+}
+.fa-box-sample .fa{
+	font-size: 18px;
+	color: #000;
+	margin-right: 10px;
+}
+#out-fa h3{
+	clear: both;
+	border-top: 1px #CCC dotted;
+}

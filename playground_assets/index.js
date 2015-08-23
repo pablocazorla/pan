@@ -7,6 +7,7 @@ var mapResources = [
 	'table(less,html)',
 	'pre(less,html,js)',
 	'box-model(less,html)',
+	'icons(less,html)',
 	'form(less,html,js)',
 	'input-groups(less,html)',
 	'buttons(less,html)',
@@ -19,7 +20,6 @@ var mapResources = [
 	'alert(less,html,js)',
 	'button-loader(html,js)',
 	'collapser(less,html,js)',
-	'carousel(less,html,js)',
-	'icons(less,html)',
+	'carousel(less,html,js)',	
 	'panel(less,html)'
 ];
