@@ -1,0 +1,54 @@
+// Heading
+h1,
+.h1 {
+  .headling-font-size_function(6);
+}
+h2,
+.h2 {
+  .headling-font-size_function(5);
+}
+h3,
+.h3 {
+  .headling-font-size_function(4);
+}
+h4,
+.h4 {
+  .headling-font-size_function(3);
+}
+h5,
+.h5 {
+  .headling-font-size_function(2);
+}
+h6,
+.h6 {
+  .headling-font-size_function(1);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: @heading-font-family;
+  font-weight: @heading-font-weight;
+  color: @headings-color;
+  margin-bottom: @margin-bottom;
+  padding-top: 0.7 * @margin-bottom;
+  small,
+  .small {
+    font-weight: normal;
+    line-height: 1;
+  }
+}
+h5,
+.h5,
+h6,
+.h6 {
+  font-weight: @heading-h5-h6-font-weight;
+}

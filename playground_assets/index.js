@@ -1,6 +1,7 @@
 var mapResources = [
 	'__variables(less)',
 	'_functions(less,js)',
+	'heading(less,html)',
 	'basic(less,html)',
 	'lists(less,html)',
 	'table(less,html)',
