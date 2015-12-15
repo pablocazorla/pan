@@ -18,7 +18,6 @@ var mapResources = [
 	'modal(less,html,js)',
 	'tooltip(less,html,js)',
 	'alert(less,html,js)',
-	'button-loader(html,js)',
 	'collapser(less,html,js)',
 	'carousel(less,html,js)',	
 	'panel(less,html)'

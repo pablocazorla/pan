@@ -2,9 +2,8 @@
 pre {
     font-family: @monospace-font-family;
     font-size: @pre-font-size;
-    background-color: #333;
+    background-color: @code-background;
     margin-bottom: 1.4 * @margin-bottom;
-    color: #fff;
     padding: @pre-padding;
     overflow: hidden;
     overflow-y: scroll;
@@ -14,6 +13,8 @@ pre {
     white-space: -pre-wrap;
     white-space: -o-pre-wrap;
     word-wrap: break-word;
+    border: 1px solid @code-border-color;
+    border-radius: @code-border-radius;
 }
 code {
     white-space: nowrap;
