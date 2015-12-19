@@ -1,24 +1,47 @@
-var mapResources = [
-	'__variables(less)',
-	'_functions(less,js)',
-	'heading(less,html)',
-	'basic(less,html)',
-	'lists(less,html)',
-	'table(less,html)',
-	'pre(less,html,js)',
-	'box-model(less,html)',
-	'icons(less,html)',
-	'form(less,html,js)',
-	'input-groups(less,html)',
-	'buttons(less,html)',
-	'button-groups(less,html)',
-	'dropdown(less,html,js)',
-	'tabs(less,html,js)',
-	'image-responsive(less,html)',
-	'modal(less,html,js)',
-	'tooltip(less,html,js)',
-	'alert(less,html,js)',
-	'collapser(less,html,js)',
-	'carousel(less,html,js)',	
-	'panel(less,html)'
-];
+var mapResources = [{
+	'name': 'hidden',
+	'resources': [
+		'__variables(less)',
+		'_functions(less,js)'
+	]
+}, {
+	'name': 'Text',
+	'resources': [
+		'Heading=heading(less,html)',
+		'Text=basic(less,html)',
+		'Lists (ul, ol)=lists(less,html)',
+		'Table=table(less,html)',
+		'Pre & Code=pre(less,html,js)'
+	]
+}, {
+	'name': 'Inputs',
+	'resources': [
+		'Form=form(less,html,js)',
+		'Input Group=input-groups(less,html)',
+		'Button=buttons(less,html)',
+		'Group of Buttons=button-groups(less,html)',
+		'Dropdown=dropdown(less,html,js)'
+	]
+}, {
+	'name': 'Image & Media',
+	'resources': [
+		'Font Awesome Icons=icons(less,html)',
+		'Image responsive=image-responsive(less,html)'
+	]
+}, {
+	'name': 'Box Model',
+	'resources': [
+		'Grid=box-model(less,html)'
+	]
+}, {
+	'name': 'Parts',
+	'resources': [
+		'Tabs=tabs(less,html,js)',
+		'Modal=modal(less,html,js)',
+		'Tooltip=tooltip(less,html,js)',
+		'Alert=alert(less,html,js)',
+		'Collapser=collapser(less,html,js)',
+		'Carousel=carousel(less,html,js)',
+		'Panel=panel(less,html)'
+	]
+}];

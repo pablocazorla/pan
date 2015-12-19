@@ -5,17 +5,22 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>Pan Playground</title>
 	<!-- CSS -->
+	<link type="text/css" rel="stylesheet" href="playground_assets/font-awe.css">
 	<link type="text/css" rel="stylesheet" href="playground_assets/style.css">
 </head>
 <body>
 	<div id="playground-error"></div>
-	<div id="playground-index">
+	<div id="playground-index" class="open">
+		<div id="playground-index-toggle" title="playground"><span></span></div>
 		<div id="playground-title">Pandora Playground</div>
-		<div id="playground-actions"><a href="" id="playground-compile-btn">Compile</a></div>
+		<div id="playground-actions" style="display:none"><a href="" id="playground-compile-btn">Compile</a></div>
 		<div id="playground-list"></div>
 	</div>
 	<div id="playground-container"></div>
-	<div id="playground-result">
+
+
+
+	<div id="playground-result" style="display:none">
 		<span class="playground-result-close">×</span>
 		<div class="playground-result-col">
 			CSS:
