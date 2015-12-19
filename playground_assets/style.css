@@ -12,7 +12,7 @@ body{
 	position: fixed;z-index: 10000;
 	top: 0;bottom: 0;left: -260px;width:260px;
 	color: #EEE;
-	background-color: #333;
+	background-color: #1F292D;
 	font: 13px/1.3em sans-serif;
 	-webkit-transition:left .2s;
 	-ms-transition:left .2s;
@@ -24,7 +24,7 @@ body{
 	border-right: solid 1px #AAA;
 }
 #playground-index-toggle{
-	background-color: #333;
+	background-color: #1F292D;
 	height:40px;width: 10px;
 	position: absolute;
 	top: 50%;right: -10px;
@@ -44,7 +44,74 @@ body{
 	font-size: 20px;
 	line-height: 1em;
 	padding: 20px 0;
-	text-align: center;
 }
 
 /* playground-index ***********/
+.playground-list-li{
+	overflow: hidden;
+	max-height: 37px;
+	background-color: #182023;
+	-webkit-transition:max-height .3s;
+	-ms-transition:max-height .3s;
+	transition:max-height .3s;
+}
+.playground-list-li.open{
+	max-height: 500px;
+}
+
+.playground-list-tit,
+.playground-list-btn{
+	line-height: 15px;
+	padding: 10px 20px;
+}
+.playground-list-tit{
+	border-top:1px solid #28353a;
+	background-color: #1F292D;
+	
+	cursor: pointer;
+}
+.playground-list-li .fa{
+	margin-right: 8px;
+}
+.playground-list-li .fa-caret-down,
+.playground-list-li.open .fa-caret-right{display: none}
+.playground-list-li.open .fa-caret-down{display: inline-block}
+
+.playground-list-btn{
+	padding-left: 45px;
+	font-size: 11px;
+}
+
+/***********************/
+.pg-input,
+.pg-pre-input{
+display: inline-block;
+vertical-align: middle;
+}
+.pg-input{
+	display: inline-block;
+	width: 13px;height: 13px;
+	border: 1px solid #666;
+	color: #4DEE10;
+	margin-right: 8px;
+	cursor: pointer;
+}
+.pg-input .fa{
+	position: relative;
+	top: -2px;
+}
+.disabled .pg-input .fa{
+	display: none
+}
+.disabled .pg-pre-input{
+	opacity: .5;
+}
+
+
+/************************/
+.playground-collection-container{
+	display: none;
+}
+.playground-collection-container.open{
+	display: block;
+}
