@@ -58,9 +58,13 @@
 						enabled: u.observable(true),
 						title: t,
 						file: f,
-						less: (e.indexOf('less') > 0),
-						html: (e.indexOf('html') > 0),
-						js: (e.indexOf('js') > 0)
+						less: (e.indexOf('less') >= 0),
+						html: (e.indexOf('html') >= 0),
+						js: (e.indexOf('js') >= 0),
+						lessContent: '',
+						htmlContent: '',
+						jsContent: '',
+						nowrap: (e.indexOf('nowrap') >= 0)
 					};
 				},
 				each: function(cbk) {
@@ -96,14 +100,15 @@
 			};
 		})();
 
-
-
 	$('document').ready(function() {
 
 		var $playgroundIndex = $('#playground-index'),
-			$list = $('#playground-list');
+			$playgroundContainer = $('#playground-container'),
+			$list = $('#playground-list'),
+			$style = $('#playground-style-output');
 		$('#playground-index-toggle').click(function() {
 			$playgroundIndex.toggleClass('open');
+			$playgroundContainer.toggleClass('open');
 		});
 
 		// Render list
@@ -181,6 +186,17 @@
 						idResource++;
 					}
 					idCollection++;
+				} else {
+					// Collection
+					collections.add('collection-' + idCollection);
+					// Resources
+					var len = o.resources.length;
+					for (var i = 0; i < len; i++) {
+						resources.add('resource-' + idResource, o.resources[i]);
+						collections.get('collection-' + idCollection).addResource('resource-' + idResource);
+						idResource++;
+					}
+					idCollection++;
 				}
 			};
 		})();
@@ -190,7 +206,7 @@
 		};
 
 		// **********************************
-		var $playgroundContainer = $('#playground-container');
+
 		collections.each(function(collection) {
 			var $containerCollection = $('<div class="playground-collection-container" id="' + collection.id + '"/>').appendTo($playgroundContainer);
 
@@ -210,32 +226,150 @@
 						$cont.hide();
 					}
 				});
+				var $tabs = $cont.find('.playground-resource-tab .playground-tab'),
+					$tabContents = $cont.find('.playground-tab-content');
+
+				$tabs.click(function() {
+					$tabs.removeClass('current');
+
+					var $this = $(this).addClass('current'),
+						c = $this.attr('data-tab');
+
+					$tabContents.removeClass('current').filter('.pg-' + c).addClass('current');
+
+				});
 			};
 			var le = collection.list.length;
 			for (var i = 0; i < le; i++) {
-				var resource = collection.list[i];
-				var $containerResource = $('<div class="playground-resource-container" id="' + resource.id + '-html"/>').appendTo($containerCollection);
-				setResourceEvents(resource, $containerResource);
+				var r = collection.list[i];
+				var $containerResource = $('<div class="playground-resource-container" id="' + r.id + '-container"/>').appendTo($containerCollection);
+				var $tabContainer = $('<div class="playground-resource-tab" id="' + r.id + '-tab"/>').appendTo($containerResource);
+
+				if (r.html) {
+					$('<div class="playground-tab current" data-tab="view">View</div>').appendTo($tabContainer);
+					$('<div class="playground-tab" data-tab="html">HTML</div>').appendTo($tabContainer);
+
+					$('<div class="playground-tab-content pg-view current"/>').appendTo($containerResource);
+					$('<div class="playground-tab-content pg-html"><pre class="playground-pre"></pre></div>').appendTo($containerResource);
+				}
+				if (r.less) {
+					$('<div class="playground-tab" data-tab="css">CSS</div>').appendTo($tabContainer);
+					$('<div class="playground-tab-content pg-css"><pre class="playground-pre"></pre></div>').appendTo($containerResource);
+				}
+				if (r.js) {
+					$('<div class="playground-tab" data-tab="js">Javascript</div>').appendTo($tabContainer);
+					$('<div class="playground-tab-content pg-js"><pre class="playground-pre"></pre></div>').appendTo($containerResource);
+				}
+
+				setResourceEvents(r, $containerResource);
 
 			};
 		});
 
-		var loadResource = function(r) {
-			if(r.html){
-				$.ajax({
-					url:'create/html/'+r.file+'.html',
-					success:function(d){
-						$('#'+r.id+'-html').html(d);
-					}
-				});
-			}
-		}
-		resources.each(function(resource) {
-			loadResource(resource);
-		});
+		// loadAllResources
+
+		(function() {
+			var listHtml = [],
+				listLess = [],
+				listJs = [],
+				indHtml = 0,
+				indLess = 0,
+				indJs = 0;
+
+			resources.each(function(r) {
+				if (r.html) {
+					listHtml.push(r);
+				}
+				if (r.less) {
+					listLess.push(r);
+				}
+				if (r.js) {
+					listJs.push(r);
+				}
+			});
+
+			var loadLess = function(r) {
+					$.ajax({
+						url: 'create/less/' + r.file + '.less',
+						cache: false,
+						success: function(d) {
+							//guardo
+							r.lessContent = d;
+
+							var preLess = listLess[0].lessContent + listLess[1].lessContent + d;
+							var id = r.id;
+
+							if (typeof less !== 'undefined') {
+								less.render(preLess).then(function(output) {
+									$('#' + id + '-container .playground-tab-content.pg-css pre').html(output.css);
+								}, function(error) {
+									$lessError.show().text(error.message);
+								});
+							}
+
+							indLess++;
+							if (indLess < listLess.length) {
+								loadLess(listLess[indLess]);
+							} else {
+								// Render Less
+								var lessInput = '';
+								for (var i = 0; i < listLess.length; i++) {
+									lessInput += listLess[i].lessContent;
+								}
+								if (typeof less !== 'undefined') {
+									less.render(lessInput).then(function(output) {
+										$style.html(output.css);
+									}, function(error) {
+										$lessError.show().text(error.message);
+									});
+								}
+								// load js
+								loadJs(listJs[indJs]);
+							}
+						}
+					});
+				},
+
+				loadJs = function(r) {
+					$.getScript('create/js/' + r.file + '.js', function(data) {
+						$('#' + r.id + '-container .playground-tab-content.pg-js pre').html(data);
+						++indJs;
+						if (indJs < listJs.length) {
+							loadJs(listJs[indJs]);
+						} else {
+							Pandora.init(undefined, afterLoadAll);
+						}
+					});
+				},
+				loadHtml = function(r) {
+					$.ajax({
+						url: 'create/html/' + r.file + '.html',
+						cache: false,
+						success: function(d) {
+							var text = (r.nowrap ? '' : '<div class="wrap">') + d + (r.nowrap ? '' : '</div>'),
+								pre = d.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 
 
-		collections.get('collection-0').open(true);
+							$('#' + r.id + '-container .playground-tab-content.pg-view').html(text);
+							$('#' + r.id + '-container .playground-tab-content.pg-html pre').html(pre);
+							indHtml++;
+							if (indHtml < listHtml.length) {
+								loadHtml(listHtml[indHtml]);
+							} else {
+								// Start loading less
+								loadLess(listLess[indLess]);
+							}
+						}
+					});
+				};
+
+
+
+			loadHtml(listHtml[indHtml]);
+
+		})();
+
+		collections.get('collection-1').open(true);
 	});
 })(jQuery, mapResources);

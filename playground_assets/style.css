@@ -3,8 +3,7 @@
 
 /*******************************************/
 body{
-	overflow: hidden;	
-	overflow-y:scroll;
+	overflow: hidden;
 }
 
 /* playground-index *********************/
@@ -14,15 +13,8 @@ body{
 	color: #EEE;
 	background-color: #1F292D;
 	font: 13px/1.3em sans-serif;
-	-webkit-transition:left .2s;
-	-ms-transition:left .2s;
-	transition:left .2s;
 }
-#playground-index.open{
-	left: 0;
-	box-shadow: 2px 0 6px rgba(0,0,0,.5);
-	border-right: solid 1px #AAA;
-}
+
 #playground-index-toggle{
 	background-color: #1F292D;
 	height:40px;width: 10px;
@@ -109,9 +101,100 @@ vertical-align: middle;
 
 
 /************************/
+#playground-container{
+	position: fixed;
+	top: 0;left:0;right:0;bottom: 0;
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
 .playground-collection-container{
 	display: none;
 }
 .playground-collection-container.open{
 	display: block;
+}
+
+/***********************************/
+#playground-index.open{
+	left: 0;
+	box-shadow: 2px 0 6px rgba(0,0,0,.5);
+	border-right: solid 1px #AAA;
+}
+#playground-container.open{
+	left:260px;
+}
+#playground-index,#playground-container{
+	-webkit-transition:left .2s;
+	-ms-transition:left .2s;
+	transition:left .2s;
+}
+
+/**************/
+.playground-resource-container{
+	min-height: 80px;
+	padding-bottom: 10px;
+}
+.playground-resource-tab{
+	font:11px/24px 'Arial', sans-serif;
+	text-align: center;
+	border-bottom:1px solid #DDD;
+	padding: 6px 0 0;
+	height: 30px;
+	background-color: #FFF;
+	margin-bottom: 10px;
+}
+.playground-resource-tab .playground-tab{
+	display: inline-block;
+	height: 24px;
+	padding: 0 12px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #DDD;
+	background-color: #EEE;
+	vertical-align: bottom;
+	border-radius: 2px 2px 0 0;
+	margin: 0 1px;
+	cursor: pointer;
+	color: #999;
+	font-weight: bold;
+}
+.playground-resource-tab .playground-tab.current{
+	border-color: #DDD #DDD #FFF #DDD;
+	background-color: #FFF;
+	cursor: default;
+	color: #333;
+}
+.playground-resource-tab .playground-tab:hover{
+	border-color: #DDD;
+	color: #333;
+}
+.playground-resource-tab .playground-tab.current:hover{
+	border-color: #DDD #DDD #FFF #DDD;
+}
+.playground-tab-content{
+	display: none;
+}
+.playground-tab-content.current{
+	display: block;
+}
+
+.playground-pre {
+  font: 12px/1.3em monospace;
+  background-color: #EEE;
+  color: #111;
+  padding: 10px;
+  overflow: hidden;
+  overflow-y: scroll;
+  min-height: 80px;
+  max-height: 600px;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+  border: 1px solid #CCC;
+  margin: 0 auto;
+  display: block;
+  max-width: 900px;
 }

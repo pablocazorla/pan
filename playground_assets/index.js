@@ -1,8 +1,8 @@
 var mapResources = [{
 	'name': 'hidden',
 	'resources': [
-		'__variables(less)',
-		'_functions(less,js)'
+		'variables=__variables(less)',
+		'functions=_functions(less,js)'
 	]
 }, {
 	'name': 'Text',

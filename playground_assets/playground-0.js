@@ -1,3 +1,4 @@
+Pandora = {};
 $('document').ready(function() {
 
 	'use strict';
