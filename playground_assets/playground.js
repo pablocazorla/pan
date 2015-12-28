@@ -55,6 +55,7 @@
 						e = arr2[1];
 					res[id] = {
 						id: id,
+						$container: null,
 						enabled: u.observable(true),
 						title: t,
 						file: f,
@@ -63,6 +64,7 @@
 						js: (e.indexOf('js') >= 0),
 						lessContent: '',
 						htmlContent: '',
+						cssContent: '',
 						jsContent: '',
 						nowrap: (e.indexOf('nowrap') >= 0)
 					};
@@ -104,8 +106,13 @@
 
 		var $playgroundIndex = $('#playground-index'),
 			$playgroundContainer = $('#playground-container'),
+			$lessError = $('#playground-error'),
 			$list = $('#playground-list'),
-			$style = $('#playground-style-output');
+			$style = $('#playground-style-output'),
+			exportContent = {
+				css: '',
+				js: ''
+			};
 		$('#playground-index-toggle').click(function() {
 			$playgroundIndex.toggleClass('open');
 			$playgroundContainer.toggleClass('open');
@@ -181,7 +188,7 @@
 						collections.get('collection-' + idCollection).addResource('resource-' + idResource);
 						var $btnResource = $('<div class="playground-list-btn" data-id="resource-' + idResource + '"/>').appendTo($liCollection),
 							$inputResource = $('<span class="pg-input"><i class="fa fa-check"></i></span>').appendTo($btnResource),
-							$titleResource = $('<span class="pg-pre-input">' + resources.get('resource-' + idResource).title + '</span>').appendTo($btnResource);
+							$titleResource = $('<a href="#resource-' + idResource + '-container" class="pg-pre-input">' + resources.get('resource-' + idResource).title + '</a>').appendTo($btnResource);
 						setResourceEvents('resource-' + idResource, $btnResource, $inputResource);
 						idResource++;
 					}
@@ -212,22 +219,23 @@
 
 			collection.open.subscribe(function(v) {
 				if (v) {
-					$containerCollection.addClass('open');
+					$containerCollection.addClass('open')
+					$playgroundContainer.scrollTop(0);
 				} else {
 					$containerCollection.removeClass('open');
 				}
 			});
 
-			var setResourceEvents = function(res, $cont) {
+			var setResourceEvents = function(res, $refresh) {
 				res.enabled.subscribe(function(v) {
 					if (v) {
-						$cont.show();
+						res.$container.show();
 					} else {
-						$cont.hide();
+						res.$container.hide();
 					}
 				});
-				var $tabs = $cont.find('.playground-resource-tab .playground-tab'),
-					$tabContents = $cont.find('.playground-tab-content');
+				var $tabs = res.$container.find('.playground-resource-tab .playground-tab'),
+					$tabContents = res.$container.find('.playground-tab-content');
 
 				$tabs.click(function() {
 					$tabs.removeClass('current');
@@ -238,12 +246,24 @@
 					$tabContents.removeClass('current').filter('.pg-' + c).addClass('current');
 
 				});
+				$refresh.click(function() {
+					refreshResource(res);
+				});
+
 			};
 			var le = collection.list.length;
 			for (var i = 0; i < le; i++) {
 				var r = collection.list[i];
 				var $containerResource = $('<div class="playground-resource-container" id="' + r.id + '-container"/>').appendTo($containerCollection);
+
+				r.$container = $containerResource;
+
 				var $tabContainer = $('<div class="playground-resource-tab" id="' + r.id + '-tab"/>').appendTo($containerResource);
+
+				var $title = $('<div class="playground-resource-title">' + r.title + '</div>').appendTo($tabContainer);
+
+
+				//
 
 				if (r.html) {
 					$('<div class="playground-tab current" data-tab="view">View</div>').appendTo($tabContainer);
@@ -261,115 +281,186 @@
 					$('<div class="playground-tab-content pg-js"><pre class="playground-pre"></pre></div>').appendTo($containerResource);
 				}
 
-				setResourceEvents(r, $containerResource);
+				var $refresh = $('<div class="playground-resource-refresh">refresh <i class="fa fa-refresh"></i></div>').appendTo($tabContainer);
+
+				setResourceEvents(r, $refresh);
 
 			};
 		});
 
+
 		// loadAllResources
 
-		(function() {
-			var listHtml = [],
-				listLess = [],
-				listJs = [],
-				indHtml = 0,
-				indLess = 0,
-				indJs = 0;
+		var listHtml = [],
+			listLess = [],
+			listJs = [],
+			indHtml = 0,
+			indLess = 0,
+			indJs = 0;
 
-			resources.each(function(r) {
-				if (r.html) {
-					listHtml.push(r);
+		resources.each(function(r) {
+			if (r.html) {
+				listHtml.push(r);
+			}
+			if (r.less) {
+				listLess.push(r);
+			}
+			if (r.js) {
+				listJs.push(r);
+			}
+		});
+
+		/**********************/
+		var processLess = function(r) {
+				var lessContent = listLess[0].lessContent + listLess[1].lessContent + r.lessContent;
+
+				if (typeof less !== 'undefined') {
+					less.render(lessContent).then(function(output) {
+						r.cssContent = output.css;
+						$('#' + r.id + '-container .playground-tab-content.pg-css pre').html(output.css);
+					}, function(error) {
+						$lessError.show().text(error.message + ' in ' + r.title);
+					});
 				}
-				if (r.less) {
-					listLess.push(r);
-				}
-				if (r.js) {
-					listJs.push(r);
-				}
+			},
+			exportCss = '',
+			renderStyles = function() {
+				setTimeout(function() {
+					var css = '';
+					for (var i = 0; i < listLess.length; i++) {
+						var r = listLess[i];
+						if (r.enabled()) {
+							css += r.cssContent;
+						}
+
+					}
+					exportCss = css;
+					$style.html(css);
+				}, 100);
+			};
+		resources.each(function(r) {
+			r.enabled.subscribe(function() {
+				renderStyles();
 			});
+		});
 
-			var loadLess = function(r) {
-					$.ajax({
-						url: 'create/less/' + r.file + '.less',
-						cache: false,
-						success: function(d) {
+
+
+		var loadResrc = function(r, format, cbk) {
+			if (format === 'js') {
+				$.getScript('create/js/' + r.file + '.js', cbk);
+			} else {
+				$.ajax({
+					url: 'create/' + format + '/' + r.file + '.' + format,
+					cache: false,
+					success: cbk
+				});
+			}
+
+		};
+		/***********************/
+
+		var loadLess = function(r) {
+				loadResrc(r, 'less', function(d) {
+					//guardo
+					r.lessContent = d;
+					processLess(r);
+					indLess++;
+					if (indLess < listLess.length) {
+						loadLess(listLess[indLess]);
+					} else {
+						// Render styles
+						renderStyles();
+						// load js
+						loadJs(listJs[indJs]);
+					}
+				});
+			},
+
+			loadJs = function(r) {
+				loadResrc(r, 'js', function(d) {
+					var pre = d.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+					$('#' + r.id + '-container .playground-tab-content.pg-js pre').html(pre);
+					r.jsContent = pre + '\n';
+					++indJs;
+					if (indJs < listJs.length) {
+						loadJs(listJs[indJs]);
+					} else {
+						Pandora.init(undefined, afterLoadAll);
+					}
+				});
+			},
+			loadHtml = function(r) {
+				loadResrc(r, 'html', function(d) {
+					var text = (r.nowrap ? '' : '<div class="wrap">') + d + (r.nowrap ? '' : '</div>'),
+						pre = d.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+					$('#' + r.id + '-container .playground-tab-content.pg-view').html(text);
+					$('#' + r.id + '-container .playground-tab-content.pg-html pre').html(pre);
+					indHtml++;
+					if (indHtml < listHtml.length) {
+						loadHtml(listHtml[indHtml]);
+					} else {
+						// Start loading less
+						loadLess(listLess[indLess]);
+					}
+				});
+			};
+
+		loadHtml(listHtml[indHtml]);
+
+		var refreshResource = (function() {
+			var refreshing = false;
+			return function(r) {
+				if (!refreshing) {
+					refreshing = true;
+					loadResrc(r, 'html', function(d) {
+						var text = (r.nowrap ? '' : '<div class="wrap">') + d + (r.nowrap ? '' : '</div>'),
+							pre = d.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+						$('#' + r.id + '-container .playground-tab-content.pg-view').html(text);
+						$('#' + r.id + '-container .playground-tab-content.pg-html pre').html(pre);
+						// Start loading less
+						loadResrc(r, 'less', function(d) {
 							//guardo
 							r.lessContent = d;
+							processLess(r);
 
-							var preLess = listLess[0].lessContent + listLess[1].lessContent + d;
-							var id = r.id;
-
-							if (typeof less !== 'undefined') {
-								less.render(preLess).then(function(output) {
-									$('#' + id + '-container .playground-tab-content.pg-css pre').html(output.css);
-								}, function(error) {
-									$lessError.show().text(error.message);
-								});
-							}
-
-							indLess++;
-							if (indLess < listLess.length) {
-								loadLess(listLess[indLess]);
-							} else {
-								// Render Less
-								var lessInput = '';
-								for (var i = 0; i < listLess.length; i++) {
-									lessInput += listLess[i].lessContent;
-								}
-								if (typeof less !== 'undefined') {
-									less.render(lessInput).then(function(output) {
-										$style.html(output.css);
-									}, function(error) {
-										$lessError.show().text(error.message);
-									});
-								}
-								// load js
-								loadJs(listJs[indJs]);
-							}
-						}
+							// Render styles
+							renderStyles();
+							refreshing = false;
+						});
 					});
-				},
-
-				loadJs = function(r) {
-					$.getScript('create/js/' + r.file + '.js', function(data) {
-						$('#' + r.id + '-container .playground-tab-content.pg-js pre').html(data);
-						++indJs;
-						if (indJs < listJs.length) {
-							loadJs(listJs[indJs]);
-						} else {
-							Pandora.init(undefined, afterLoadAll);
-						}
-					});
-				},
-				loadHtml = function(r) {
-					$.ajax({
-						url: 'create/html/' + r.file + '.html',
-						cache: false,
-						success: function(d) {
-							var text = (r.nowrap ? '' : '<div class="wrap">') + d + (r.nowrap ? '' : '</div>'),
-								pre = d.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
-
-
-							$('#' + r.id + '-container .playground-tab-content.pg-view').html(text);
-							$('#' + r.id + '-container .playground-tab-content.pg-html pre').html(pre);
-							indHtml++;
-							if (indHtml < listHtml.length) {
-								loadHtml(listHtml[indHtml]);
-							} else {
-								// Start loading less
-								loadLess(listLess[indLess]);
-							}
-						}
-					});
-				};
-
-
-
-			loadHtml(listHtml[indHtml]);
-
+				}
+			};
 		})();
 
 		collections.get('collection-1').open(true);
+
+		// Export
+		(function() {
+			var $panel = $('#playground-result'),
+				$close = $('.playground-result-close'),
+				$css = $('#playground-result-css'),
+				$js = $('#playground-result-js');
+			$('#playground-export-btn').click(function() {
+				$css.scrollTop(0).html(exportCss);
+
+				var jscont = '';
+				resources.each(function(r) {
+					if (r.enabled()) {
+						jscont += r.jsContent;
+					}
+
+				});
+
+
+
+				$js.scrollTop(0).html(jscont);
+				$panel.fadeIn(300);
+			});
+			$close.click(function() {
+				console.log('cierro');
+				$panel.fadeOut(300);
+			});
+		})();
 	});
 })(jQuery, mapResources);
