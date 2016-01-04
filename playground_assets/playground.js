@@ -310,9 +310,14 @@
 			}
 		});
 
+		// Guardo el r de __variables y __functions
+		var r__variables = listLess[0],
+			r__functions = listLess[1];
+
+
 		/**********************/
 		var processLess = function(r) {
-				var lessContent = listLess[0].lessContent + listLess[1].lessContent + r.lessContent;
+				var lessContent = r__variables.lessContent + r__functions.lessContent + r.lessContent;
 
 				if (typeof less !== 'undefined') {
 					less.render(lessContent).then(function(output) {
@@ -419,14 +424,23 @@
 						$('#' + r.id + '-container .playground-tab-content.pg-view').html(text);
 						$('#' + r.id + '-container .playground-tab-content.pg-html pre').html(pre);
 						// Start loading less
-						loadResrc(r, 'less', function(d) {
+						loadResrc(r__variables, 'less', function(d) {
 							//guardo
-							r.lessContent = d;
-							processLess(r);
+							r__variables.lessContent = d;
 
-							// Render styles
-							renderStyles();
-							refreshing = false;
+							loadResrc(r__functions, 'less', function(d) {
+								//guardo
+								r__functions.lessContent = d;
+								loadResrc(r, 'less', function(d) {
+									//guardo
+									r.lessContent = d;
+									processLess(r);
+
+									// Render styles
+									renderStyles();
+									refreshing = false;
+								});
+							});
 						});
 					});
 				}

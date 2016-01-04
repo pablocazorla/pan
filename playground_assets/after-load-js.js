@@ -85,4 +85,17 @@
 				modalAjax.show();
 			});
 		}
-	}
+
+		// Parallax
+		var $pEx1 = Pandora.parallax({
+			id: 'parallax-example-1',
+			backgroundImage: 'create/img/parallax-example-1.jpg',
+			height:'full'
+		});
+		var $pEx2 = Pandora.parallax({
+			id: 'parallax-example-2',
+			backgroundImage: 'create/img/parallax-example-2.jpg',
+			dimmerColor:'#00F',
+			dimmerOpacity: .7
+		});
+	};

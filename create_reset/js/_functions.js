@@ -1,10 +1,10 @@
 // Basic
 S = {};
 Pandora = {
-	init: function(context,callback) {
+	init: function(context, callback) {
 		var ctx = (typeof context === 'string') ? context + ' ' : '';
 		// Store
-		S.$window = $(window);
+		S.$window = Pandora.$window = $(window);
 		S.$body = $('body');
 
 		// Init
@@ -13,7 +13,7 @@ Pandora = {
 				Pandora[a].init(ctx);
 			}
 		}
-		if(typeof callback === 'function'){
+		if (typeof callback === 'function') {
 			callback();
 		}
 	}

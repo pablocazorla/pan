@@ -1,0 +1,33 @@
+// Parallax
+.parallax{
+  position:relative;
+  width: 100%;
+  background-color: @parallax-background-color;
+  min-height: 50px;
+
+  .parallax-content{
+    position:absolute;
+    top:50%;left: 0;right: 0;
+    .transition(margin-top .3s);
+
+    &,h1,h2,h3,h4,h5,h6,p{
+      color: #FFF;
+    }
+  }
+}
+.parallax-screen{
+  position:absolute;
+  top:0;bottom:0;left: 0;right: 0;
+  background-color: #000;
+  overflow: hidden;
+
+  .parallax-img-container{
+    position:absolute;
+    top:0;left: 0;
+    width: 100%;
+
+    img{
+      width:100%;height:auto;
+    }
+  }
+}

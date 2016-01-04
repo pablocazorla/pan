@@ -2,7 +2,8 @@ var mapResources = [{
 	'name': 'hidden',
 	'resources': [
 		'variables=__variables(less)',
-		'functions=_functions(less,js)'
+		'functions=_functions(less,js,nowrap)'
+		// nowrap Se agrega para que no se wrapee el contenido		
 	]
 }, {
 	'name': 'Text',
@@ -43,5 +44,10 @@ var mapResources = [{
 		'Collapser=collapser(less,html,js)',
 		'Carousel=carousel(less,html,js)',
 		'Panel=panel(less,html)'
+	]
+}, {
+	'name': 'Components',
+	'resources': [
+		'Parallax=parallax(less,html,js,nowrap)'
 	]
 }];
