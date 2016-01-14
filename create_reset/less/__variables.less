@@ -1,11 +1,11 @@
 // Fonts
-//@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,600italic);
-@font-family: 'Open Sans',sans-serif;
+//@import url(https://fonts.googleapis.com/css?family=Raleway:400,700);
+@font-family: 'Raleway','Open Sans',sans-serif;
 @heading-font-family: @font-family;
 @monospace-font-family: monospace;
 
 // Main
-@font-size: 14px;
+@font-size: 16px;
 @line-height: 1.3em;
 @margin-bottom: @font-size;
 @border-radius: 0;
@@ -76,7 +76,7 @@
 @code-border-radius: @border-radius;
 
 // Box Model
-@wrap-max-width: 1200px;
+@wrap-max-width: 1300px;
 @gutter: 30px;
 
 // Form
@@ -102,7 +102,7 @@
 
 // btn primary
 @btn-primary-color: #fff;
-@btn-primary-background-color: @a-color;
+@btn-primary-background-color: #EF6A49;
 @btn-primary-border-color: transparent;//lighten(@a-color, 10%);
 
 // btn secondary
@@ -191,3 +191,54 @@
 
 // parallax
 @parallax-background-color:#DDD;
+
+// Header
+@header-background-color:#FFF;
+@header-border-bottom-color:#DDD;
+
+@header-dark-background-color:#222;
+@header-dark-border-bottom-color:#333;
+@header-dark-color:#EEE;
+
+@header-wide-padding:@font-size;
+
+// Brand
+@menu-brand-font-size:1.2 * @font-size;
+@menu-brand-padding: 8px 0;
+
+
+// Menu
+@menu-font-size: .9 * @font-size;
+@menu-line-height:50px;
+@menu-a-line-height:25px;
+@menu-font-weight: 600;
+@menu-margin-between-links:30px;
+
+@menu-color: lighten(@color, 30%);
+@menu-color-hover: darken(@menu-color, 30%);
+
+@menu-opener-color:lighten(@menu-color, 20%);
+
+@menu-border-bottom-width: 2px;
+@menu-border-bottom-color: @a-color;
+
+@menu-ul-next-border-color:lighten(@border-color, 10%);
+
+@menu-ul-ul-background-color:#FFF;
+@menu-ul-ul-border-color:#DDD;
+@menu-ul-ul-box-shadow:@dropdown-box-shadow;
+@menu-ul-ul-a-padding:30px;
+
+@menu-ul-ul-a-color: @menu-border-bottom-color;
+@menu-ul-ul-a-background-color:#EEE;
+@menu-ul-ul-li-border-color:#DDD;
+@menu-ul-ul-separator-background-color:#CCC;
+
+@menu-ul-ul-ul-font-size: .5 * @font-size;
+@menu-ul-ul-ul-padding-bottom: 10px;
+@menu-ul-ul-ul-a-color: #FFF;
+@menu-ul-ul-ul-separator-background-color:#444;
+
+@menu-responsive-background-color:rgba(84, 51, 137, 0.9);
+@menu-responsive-color:#FFF;
+@menu-responsive-color-hover:#DDD;

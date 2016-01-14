@@ -8,20 +8,21 @@ Pandora.parallaxConstructor = (function() {
 
 	p.prototype = {
 		init_: function(options) {
-			this.config = $.extend({
-				id: null,
-				backgroundImage: '',
-				backgroundPosition: 'top center',
+			var setup = $.extend({
+				selection: null,
+				backgroundposition: 'top center',
 				cover: 'full', // 'pattern' 
-				dimmerColor: '#000',
-				dimmerOpacity: .3,
-				dimmerFade: .6,
+				dimmercolor: '#000',
+				dimmeropacity: .3,
+				dimmerfade: .6,
 				height: 500,
-				width: '100%',
-				velocity: .3
+				velocity: .3,
+				parentscroll: window
 			}, options);
 
-			this.$wrap = $('#' + this.config.id);
+			this.$wrap = $(setup.selection).eq(0);
+
+			this.config = $.extend(setup, this.$wrap.data());
 
 			if (this.$wrap.css('position') === 'static') {
 				this.$wrap.css('position', 'relative');
@@ -29,66 +30,61 @@ Pandora.parallaxConstructor = (function() {
 
 			this.$content = this.$wrap.find('.parallax-content');
 
-			this.$screen = $('<div class="parallax-screen"/>')
-				.prependTo(this.$wrap).css({
-					'background-color': this.config.dimmerColor
+			this.$screen = this.$wrap.find('.parallax-background').css({
+					'background-color': this.config.dimmercolor
+				});
+			this.$imgContainer = this.$screen.find('.parallax-background-content').css({
+					opacity: (1 - this.config.dimmeropacity)
 				});
 
-			this.$imgContainer = $('<div class="parallax-img-container"/>')
-				.appendTo(this.$screen)
-				.css({
-					opacity: (1 - this.config.dimmerOpacity)
-				});
-			this.$img = $('<img/>')
-				.appendTo(this.$imgContainer);
+
+
 
 			var self = this;
+			// Wait visible
+			var wait = setInterval(function() {
+				if (self.$wrap.is(':visible')) {
+					// visible, do something
+					self.setSize().setImgPosition();
+					self.$wrap.css('opacity','1');
+					clearInterval(wait);
+				}
+			}, 50);
 
-			this.$img.load(function() {
-				self.imgWidth = $(this).width();
-				self.imgHeight = $(this).height();
-				self.imgMod = self.imgWidth / self.imgHeight;
-				self.setImgPosition();
-			});
-
-			this.$img.attr('src', this.config.backgroundImage);
+				
 
 
-			return this.setSize().setEvents(self);
+			return this.setSize().setImgPosition().setEvents(self);
 		},
 		setSize: function() {
+			// Set height of screen
 			var h = (this.config.height === 'full') ? Pandora.$window.height() : this.config.height;
-			this.$wrap.css({
-				height: h,
-				width: this.config.width
-			});
+			this.$wrap.height(h);
 
+			// Center the content
 			var hCont = this.$content.height();
 			this.$content.css({
 				marginTop: -.5 * hCont + 'px'
 			});
-			return this;
+			return this.setImgPosition();
 		},
 		setImgPosition: function() {
 			var self = this;
-			setInterval(function() {
 
+			var top = self.$wrap.offset().top;
 
-				var top = self.$wrap.offset().top;
-
-				if (self.config.dimmerFade > 0) {
-					var h = -1 * top / self.$wrap.height();
-					h = (h < 0) ? 0 : ((h > 1) ? 1 : h);
-					self.$imgContainer.css({
-						top: -1 * top * self.config.velocity + 'px',
-						opacity: 1 - (h * (self.config.dimmerFade - self.config.dimmerOpacity) + self.config.dimmerOpacity)
-					});
-				} else {
-					self.$imgContainer.css({
-						top: -1 * top * self.config.velocity + 'px'
-					});
-				}
-			}, 20);
+			if (self.config.dimmerfade > 0) {
+				var h = -1 * top / self.$wrap.height();
+				h = (h < 0) ? 0 : ((h > 1) ? 1 : h);
+				self.$imgContainer.css({
+					top: -1 * top * self.config.velocity + 'px',
+					opacity: 1 - (h * (self.config.dimmerfade - self.config.dimmeropacity) + self.config.dimmeropacity)
+				});
+			} else {
+				self.$imgContainer.css({
+					top: -1 * top * self.config.velocity + 'px'
+				});
+			}
 			return this;
 		},
 		setEvents: function(self) {
@@ -98,18 +94,29 @@ Pandora.parallaxConstructor = (function() {
 			setInterval(function() {
 				self.setSize();
 			}, 500);
+
+			$(self.config.parentscroll).scroll(function() {
+				self.setImgPosition();
+			});
+
+
 			return this;
 		}
 	};
 
 	return {
-		init: function() {
+		init: function(ctx) {
 			if (!defined) {
 				Pandora.parallax = function(options) {
 					return new p(options);
 				}
 				defined = true;
 			}
+			$(ctx + '.parallax.auto').each(function() {
+				Pandora.parallax({
+					selection: this
+				});
+			});
 		}
 	};
 })();
