@@ -48,6 +48,9 @@ var mapResources = [{
 }, {
 	'name': 'Components',
 	'resources': [
-		'Parallax=parallax(less,html,js,nowrap)'
+		'Header=header(less,html,js,nowrap,hidetabs)',
+		'Menu=menu(less,html,js,nowrap)',
+		'Parallax=parallax(less,html,js,nowrap)',
+		'Slider=slider(less,html,js,nowrap)'
 	]
 }];

@@ -66,7 +66,8 @@
 						htmlContent: '',
 						cssContent: '',
 						jsContent: '',
-						nowrap: (e.indexOf('nowrap') >= 0)
+						nowrap: (e.indexOf('nowrap') >= 0),
+						hidetabs: (e.indexOf('hidetabs') >= 0)
 					};
 				},
 				each: function(cbk) {
@@ -284,7 +285,9 @@
 				var $refresh = $('<div class="playground-resource-refresh">refresh <i class="fa fa-refresh"></i></div>').appendTo($tabContainer);
 
 				setResourceEvents(r, $refresh);
-
+				if(r.hidetabs){
+					$tabContainer.hide();
+				}
 			};
 		});
 
@@ -447,7 +450,7 @@
 			};
 		})();
 
-		collections.get('collection-1').open(true);
+		collections.get('collection-6').open(true);
 
 		// Export
 		(function() {

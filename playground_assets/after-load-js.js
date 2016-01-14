@@ -87,6 +87,7 @@
 		}
 
 		// Parallax
+		/*
 		var $pEx1 = Pandora.parallax({
 			id: 'parallax-example-1',
 			backgroundImage: 'create/img/parallax-example-1.jpg',
@@ -98,4 +99,7 @@
 			dimmerColor:'#00F',
 			dimmerOpacity: .7
 		});
+
+	
+	*/
 	};
