@@ -8,26 +8,47 @@ Pandora = {
 		S.$body = $('body');
 
 		// Utils
-		Pandora.cssTransition = (function() {
+		var getPrefix = (function() {
 			var dummyStyles = document.createElement('div').style,
-				prefixes = 'WebkitT MozT OT MsT webkitT mozT oT msT t'.split(' '),
-				l = prefixes.length,
-				t;
+				cache = {};
+			return function(str) {
+				if (cache[str] !== undefined) {
+					return cache[str];
+				} else {
+					var STR = str.substring(0, 1).toUpperCase() + str.substring(1),
+						prefixes = 'Webkit Moz O Ms webkit moz o ms'.split(' '),
+						l = prefixes.length,
+						t;
 
-			for (var i = 0; i < l; i++) {
-				if (dummyStyles[prefixes[i] + 'ransition'] !== undefined) {
-					t = prefixes[i] + 'ransition';
+					for (var i = 0; i < l; i++) {
+						if (dummyStyles[prefixes[i] + STR] !== undefined) {
+							t = prefixes[i] + STR;
+						}
+					}
+					if (dummyStyles[str] !== undefined) {
+						t = str;
+					}
+					cache[str] = t;
+					return t;
 				}
 			}
-
-			return function($elements, p) {
-				var prop = p || '';
-				$elements.each(function() {
-					this.style[t] = prop;
-				});
-			};
 		})();
+		var css3 = function(prop, $elements, p) {
+			var t = getPrefix(prop),
+				prop = p || '';
+			$elements.each(function() {
+				this.style[t] = prop;
+			});
+		};
 
+		Pandora.cssTransition = function($elements, p) {
+			css3('transition',$elements, p);
+			return Pandora;
+		};
+		Pandora.cssTransform = function($elements, p) {
+			css3('transform',$elements, p);
+			return Pandora;
+		};
 
 		// Init
 		for (var a in Pandora) {

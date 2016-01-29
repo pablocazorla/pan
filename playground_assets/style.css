@@ -331,3 +331,21 @@ text-decoration: underline;
 .playground-result-close:active{
   color: #000;
 }
+/* for box-model */
+.col-content{
+	background-color: #EEE;
+	border: 1px solid #CCC;
+	padding: 10px;
+	overflow: hidden;
+	margin-bottom: 5px;
+}
+
+.col-box{
+	text-align: center;
+	line-height: 150px;
+	background-color: #EEE;
+	border: 1px solid #CCC;
+	padding: 10px;
+	overflow: hidden;
+	margin-bottom: 10px;
+}

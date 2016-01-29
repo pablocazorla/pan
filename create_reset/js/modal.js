@@ -100,21 +100,17 @@ Pandora.modalConstructor = {
 				renderActions: function() {
 					var self = this;
 					this.$modalActions.html('');
-					for (var i = 0; i < this.config.actions.length; i++) {
-						var acc = $.extend({
-							tag: 'a',
-							className: '',
-							text: 'Button',
-							click: null
-						}, this.config.actions[i]);
+
+					var renderAcc = function(acc) {
+
 						if (typeof acc.click !== 'function' && acc.tag === 'a') {
 							acc.tag = 'span';
 						}
 						var href = (acc.tag === 'a') ? ' href=""' : '';
 						var cl = (acc.className !== '') ? ' class="' + acc.className + '"' : '';
 
-						var $acc = $('<' + acc.tag + href + cl + '>' + acc.text + '</' + acc.tag + '>').appendTo(this.$modalActions);
-						$('<span>&nbsp;</span>').appendTo(this.$modalActions);
+						var $acc = $('<' + acc.tag + href + cl + '>' + acc.text + '</' + acc.tag + '>').appendTo(self.$modalActions);
+						$('<span>&nbsp;</span>').appendTo(self.$modalActions);
 
 						if (typeof acc.click === 'function') {
 							$acc.click(function(e) {
@@ -122,6 +118,16 @@ Pandora.modalConstructor = {
 								acc.click.apply(null, [self]);
 							});
 						}
+					};
+
+					for (var i = 0; i < this.config.actions.length; i++) {
+						var acc = $.extend({
+							tag: 'a',
+							className: '',
+							text: 'Button',
+							click: null
+						}, this.config.actions[i]);
+						renderAcc(acc);
 					}
 					return this;
 				},

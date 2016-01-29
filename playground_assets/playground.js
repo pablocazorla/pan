@@ -450,7 +450,7 @@
 			};
 		})();
 
-		collections.get('collection-6').open(true);
+		collections.get('collection-1').open(true);
 
 		// Export
 		(function() {

@@ -276,7 +276,6 @@ Pandora.sliderConstructor = (function() {
 							self.$collection.eq(next).css({
 								'z-index': '11'
 							});
-							console.log(self.current + ' - ' + next);
 							self.current = next;
 							setTimeout(function() {
 								self.updatePager();

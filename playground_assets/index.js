@@ -51,6 +51,7 @@ var mapResources = [{
 		'Header=header(less,html,js,nowrap,hidetabs)',
 		'Menu=menu(less,html,js,nowrap)',
 		'Parallax=parallax(less,html,js,nowrap)',
-		'Slider=slider(less,html,js,nowrap)'
+		'Slider=slider(less,html,js,nowrap)',
+		'Animated elements=anim(less,html,js)'
 	]
 }];

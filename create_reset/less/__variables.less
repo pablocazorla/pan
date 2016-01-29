@@ -1,11 +1,11 @@
 // Fonts
 //@import url(https://fonts.googleapis.com/css?family=Raleway:400,700);
-@font-family: 'Raleway','Open Sans',sans-serif;
+@font-family: 'Noto Sans',sans-serif;
 @heading-font-family: @font-family;
 @monospace-font-family: monospace;
 
 // Main
-@font-size: 16px;
+@font-size: 14px;
 @line-height: 1.3em;
 @margin-bottom: @font-size;
 @border-radius: 0;
@@ -14,7 +14,7 @@
 @color: #444;
 @background-color: #fff;
 @border-color: #ccc;
-@a-color: #16A3DA;
+@a-color: #5EAE00;
 @focus-color: lighten(@a-color, 5%);
 @highlight-color: lighten(@a-color, 5%);
 @theme-info-color: #0091d3;
@@ -81,7 +81,7 @@
 
 // Form
 @input-padding: 0.4em;
-@input-line-height: 1.2em;
+@input-line-height: 1em;
 @input-border-radius: @border-radius;
 @input-border-color: lighten(@border-color, 4%);
 @input-color: lighten(@color, 10%);
@@ -102,7 +102,7 @@
 
 // btn primary
 @btn-primary-color: #fff;
-@btn-primary-background-color: #EF6A49;
+@btn-primary-background-color: @a-color;
 @btn-primary-border-color: transparent;//lighten(@a-color, 10%);
 
 // btn secondary
