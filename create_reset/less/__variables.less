@@ -5,17 +5,18 @@
 @monospace-font-family: monospace;
 
 // Main
-@font-size: 14px;
+@font-size: 13px;
 @line-height: 1.3em;
 @margin-bottom: @font-size;
-@border-radius: 0;
+@border-radius: 3px;
 
 // Colors
 @color: #444;
 @background-color: #fff;
 @border-color: #ccc;
-@a-color: #5EAE00;
-@focus-color: lighten(@a-color, 5%);
+@a-color: #009DDA;
+@color-primary: #ff7f66;
+@focus-color: @color-primary;
 @highlight-color: lighten(@a-color, 5%);
 @theme-info-color: #0091d3;
 @theme-warning-color: #eec100;
@@ -80,9 +81,12 @@
 @gutter: 30px;
 
 // Form
+@form-font-size: .9 * @font-size;
+@label-font-size: .82 * @font-size;
+@label-color: lighten(@color, 40%);
 @input-padding: 0.4em;
 @input-line-height: 1em;
-@input-border-radius: @border-radius;
+@input-border-radius: 0;//@border-radius;
 @input-border-color: lighten(@border-color, 4%);
 @input-color: lighten(@color, 10%);
 @input-border-width: 1px;
@@ -94,6 +98,7 @@
 @btn-padding-horizontal: 2 * @input-padding;
 @btn-border-radius: @border-radius;
 @btn-border-width: 1px;
+@btn-o-border-width: 2px;
 
 // btn default
 @btn-default-color: @color;
@@ -102,7 +107,7 @@
 
 // btn primary
 @btn-primary-color: #fff;
-@btn-primary-background-color: @a-color;
+@btn-primary-background-color: @color-primary;
 @btn-primary-border-color: transparent;//lighten(@a-color, 10%);
 
 // btn secondary
@@ -150,7 +155,7 @@
 @tab-list-li-color: lighten(@tab-list-li-active-color, 60%);
 @tab-list-li-hover-color: lighten(@tab-list-li-active-color, 20%);
 @tab-list-li-border-width:3px;
-@tab-list-li-border-color: @a-color;
+@tab-list-li-border-color: @color-primary;
 
 // tabs vertical
 @tab-list-vertical-width: 160px;

@@ -1,6 +1,6 @@
 // Headling font-size
 .headling-font-size_function(@num) {
-  font-size: 0.8 * @font-size + ((@num / 6) * (@num / 6) * (@num / 6) * 2.8 * @font-size);
+  font-size: 0.8 * @font-size + ((@num / 6) * (@num / 6) * (@num / 6) * 1.8 * @font-size);
   line-height: @line-height;
 }
 
@@ -50,6 +50,40 @@
   }
   .triangle{
     border-top-color:@color;
+  }
+  &.btn-o{
+    color: @background;
+    border-color: @background;
+    background-color: transparent;
+    border-width: @btn-o-border-width;
+
+    &:focus,
+    &.focus,
+    &:active,
+    &.active,
+    &:hover {
+      color: darken(@background, 6%);
+      background-color: transparent;
+      border-color: darken(@background, 6%);
+    }
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] &,
+    .disabled & {
+      &,
+      &:hover,
+      &:focus,
+      &.focus,
+      &:active,
+      &.active {
+        color: @background !important;
+        background-color: transparent;
+        border-color: @background;
+      }
+    }
+    .triangle{
+      border-top-color:@background;
+    }
   }
 }
 .button-size(@scale) {
